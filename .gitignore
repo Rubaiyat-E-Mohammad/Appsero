@@ -1,0 +1,10 @@
+node_modules/
+/test-results/
+/playwright-report/
+/playwright/.cache/
+/tests-examples/
+state.json
+overview stats.json
+.env
+.vscode
+.DS_Store
