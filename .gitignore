@@ -3,7 +3,7 @@ node_modules/
 /playwright-report/
 /playwright/.cache/
 /tests-examples/
-# state.json
+state.json
 overview stats.json
 .env
 .vscode
