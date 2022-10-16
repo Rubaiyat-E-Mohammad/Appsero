@@ -4,6 +4,7 @@ node_modules/
 /playwright/.cache/
 /tests-examples/
 state.json
+package.json
 overview stats.json
 .env
 .vscode
