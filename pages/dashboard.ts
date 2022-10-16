@@ -18,12 +18,11 @@ class DashboardPage {
             todays_revenue, todays_new_subscriptions, todays_new_orders, todays_refunds: string
         }[] = [];
 
-        await this.page.goto(base_url, { waitUntil: 'networkidle' });
+        await this.page.goto(base_url);
+        await this.page.waitForLoadState("networkidle");
 
         /* ---- Data Scrapping ---- */
         // let x: string = await this.page.locator('').innerText();
-
-        await this.page.waitForLoadState("networkidle");
 
         let total_plugins: string = await this.page.locator(dashboard_locator.plugin_count).innerText();
         let total_themes: string = await this.page.locator(dashboard_locator.theme_count).innerText();

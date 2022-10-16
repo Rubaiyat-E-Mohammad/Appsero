@@ -1,6 +1,6 @@
 import * as faker from 'faker';
 
-let base_url: string = "https://staging.appsero.com/";
+let base_url: string = "https://staging.appsero.com";
 
 let plugin_data: {
     plugin_name, slug_name, plugin_version, php_version, wp_version, tested_upto_version,
