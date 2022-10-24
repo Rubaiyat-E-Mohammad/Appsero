@@ -10,13 +10,13 @@ export class ProductPage {
     this.page = page;
   }
 
-  async product_delete(name) {
+  async product_delete(product_name) {
 
     await this.page.goto(base_url);
     await this.page.locator(product_finding_locator.search).hover();
     await this.page.locator(product_finding_locator.search_project).click();
-    await this.page.locator(product_finding_locator.search_project).fill(name);
-    await this.page.locator('//h3[text()="' + name + '"]').click();
+    await this.page.locator(product_finding_locator.search_project).fill(product_name);
+    await this.page.locator('//h3[text()="' + product_name + '"]').click();
     await this.page.locator(product_finding_locator.settings).click();
     await this.page.locator(product_finding_locator.edit).click();
     await this.page.locator(product_finding_locator.delete).click();

@@ -1,5 +1,6 @@
 import { Page } from '@playwright/test';
-import { base_url, theme_data } from '../utils/data';
+import * as faker from 'faker';
+import { base_url } from '../utils/data';
 import { theme_locator, product_finding_locator } from '../utils/locators';
 
 
@@ -10,7 +11,7 @@ export class ThemePage {
     this.page = page;
   }
 
-  async free_theme_create() {
+  async free_theme_create(theme_name) {
 
     await this.page.goto(base_url);
     await this.page.locator(theme_locator.navigate).click();
@@ -18,9 +19,10 @@ export class ThemePage {
     await this.page.locator(theme_locator.free_theme).click();
     await this.page.locator(theme_locator.manual_entry).click();
 
-    await this.page.locator(theme_locator.name).fill(theme_data.theme_name);
-    await this.page.locator(theme_locator.slug).fill(theme_data.slug_name);
-    await this.page.locator(theme_locator.theme_version).fill(theme_data.theme_version);
+    await this.page.locator(theme_locator.name).fill(theme_name);
+    await this.page.locator(theme_locator.slug).fill(((theme_name.split(" ")).join("_")).toLowerCase());
+
+    await this.page.locator(theme_locator.theme_version).fill(faker.finance.amount(0, 9, 1));
 
     await this.page.locator(theme_locator.submit).click();
     await this.page.locator(theme_locator.skip).click();
@@ -31,17 +33,17 @@ export class ThemePage {
   };
 
 
-  async pro_theme_create(website_url, product_name) {
+  async pro_theme_create(theme_name, website_url, product_name) {
 
     await this.page.goto(base_url);
     await this.page.locator(theme_locator.navigate).click();
     await this.page.locator(theme_locator.add_theme).click();
     await this.page.locator(theme_locator.pro_theme).click();
 
-    await this.page.locator(theme_locator.name).fill(theme_data.theme_name);
-    await this.page.locator(theme_locator.slug).fill(theme_data.slug_name);
-    await this.page.locator(theme_locator.theme_version).fill(theme_data.theme_version);
+    await this.page.locator(theme_locator.name).fill(theme_name);
+    await this.page.locator(theme_locator.slug).fill(((theme_name.split(" ")).join("_")).toLowerCase());
 
+    await this.page.locator(theme_locator.theme_version).fill(faker.finance.amount(0, 9, 1));
     await this.page.locator(theme_locator.submit).click();
 
     await this.page.locator(theme_locator.yes).click();
@@ -60,19 +62,19 @@ export class ThemePage {
   };
 
 
-  async theme_update(data, name) {
+  async theme_update(updateable_theme_name, new_theme_name) {
 
     await this.page.goto(base_url);
     await this.page.locator(product_finding_locator.theme_navigate).click();
     await this.page.locator(product_finding_locator.search).hover();
     await this.page.locator(product_finding_locator.search_project).click();
-    await this.page.locator(product_finding_locator.search_project).fill(name);
-    await this.page.locator('(//h3[text()="' + name + '"])[1]').click();
+    await this.page.locator(product_finding_locator.search_project).fill(updateable_theme_name);
+    await this.page.locator('(//h3[text()="' + updateable_theme_name + '"])[1]').click();
     await this.page.locator(product_finding_locator.settings).click();
     await this.page.locator(product_finding_locator.edit).click();
 
-    await this.page.locator(product_finding_locator.name).fill(data.theme_name);
-    await this.page.locator(product_finding_locator.version).fill(data.theme_version);
+    await this.page.locator(product_finding_locator.name).fill(new_theme_name);
+    await this.page.locator(product_finding_locator.version).fill(faker.finance.amount(0, 9, 1));
     await this.page.locator(product_finding_locator.update_theme).click();
 
   };

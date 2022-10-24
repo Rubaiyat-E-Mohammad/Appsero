@@ -1,4 +1,4 @@
-import { Page, chromium } from "@playwright/test";
+import { chromium } from "@playwright/test";
 import { base_url } from "../utils/data";
 import { login_locator } from "../utils/locators";
 import * as fs from "fs";

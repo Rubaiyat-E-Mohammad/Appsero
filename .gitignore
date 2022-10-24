@@ -4,6 +4,7 @@ node_modules/
 /playwright/.cache/
 /tests-examples/
 overview stats.json
+state.json
 .env
 .vscode
 .DS_Store
