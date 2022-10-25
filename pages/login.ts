@@ -14,6 +14,7 @@ export class LoginPage {
     const page = await browser.newPage();
 
     await page.goto(base_url);
+
     await page.locator(login_locator.email).fill(user_name);
     await page.locator(login_locator.pass).fill(password);
     await page.locator(login_locator.submit).click();

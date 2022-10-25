@@ -1,4 +1,4 @@
-import { Page, expect } from '@playwright/test';
+import { Page } from '@playwright/test';
 import { base_url } from '../utils/data';
 import { dashboard_locator } from '../utils/locators';
 import * as fs from 'fs';
@@ -20,7 +20,6 @@ class DashboardPage {
 
         await this.page.goto(base_url);
         await this.page.waitForLoadState("networkidle");
-        //await expect(response).toBeOK();
 
         /* ---- Data Scrapping ---- */
         // let x: string = await this.page.locator('').innerText();

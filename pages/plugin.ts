@@ -12,6 +12,8 @@ class PluginPage {
   async free_plugin_create(plugin_name) {
 
     await this.page.goto(base_url);
+    await this.page.waitForLoadState("networkidle");
+
     await this.page.locator(plugin_locator.navigate).click();
     await this.page.locator(plugin_locator.add_plugin).click();
     await this.page.locator(plugin_locator.free_plugin).click();
@@ -43,6 +45,8 @@ class PluginPage {
   async pro_plugin_create(plugin_name, website_url, product_name) {
 
     await this.page.goto(base_url);
+    await this.page.waitForLoadState("networkidle");
+
     await this.page.locator(plugin_locator.navigate).click();
     await this.page.locator(plugin_locator.add_plugin).click();
     await this.page.locator(plugin_locator.pro_plugin).click();
@@ -83,6 +87,8 @@ class PluginPage {
   async plugin_update(data, plugin_name, new_plugin_name) {
 
     await this.page.goto(base_url);
+    await this.page.waitForLoadState("networkidle");
+
     await this.page.locator(product_finding_locator.plugin_navigate).click();
     await this.page.locator(product_finding_locator.search).hover();
     await this.page.locator(product_finding_locator.search_project).click();

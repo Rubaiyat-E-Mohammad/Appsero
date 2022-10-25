@@ -10,8 +10,11 @@ import { BundlePage } from "../pages/bundle";
 import { ProductPage } from "../pages/products";
 
 
+const products_name: string[] = [];
+
+
 /* ------------------------ Login ------------------------ */
-test("Login", async ({ page }) => {
+test("Login", async ({ }) => {
 
     const login = new LoginPage();
     await login.login(process.env.USER_NAME, process.env.PASSWORD);
@@ -19,13 +22,13 @@ test("Login", async ({ page }) => {
 });
 
 
-// /* ------------------------ Getting Dashboard Details ------------------------ */
-// test("Getting Dashboard Overview Details", async ({ page }) => {
+/* ------------------------ Getting Dashboard Details ------------------------ */
+test("Getting Dashboard Overview Details", async ({ page }) => {
 
-//     const dashboard = new DashboardPage(page);
-//     await dashboard.overview_details();
+    const dashboard = new DashboardPage(page);
+    await dashboard.overview_details();
 
-// });
+});
 
 
 /* ------------------------ Plugin ------------------------ */
@@ -34,12 +37,16 @@ test("Plugin Create & Update", async ({ page }) => {
     const plugin = new PluginPage(page);
 
     //Could be any valid plugin name
-    const plugin_name: string = faker.lorem.words(2); //Auto generated plugin name
+    const free_plugin_name: string = faker.lorem.words(2); //Auto generated plugin name
+    const pro_plugin_name: string = faker.lorem.words(2); //Auto generated plugin name
     const website_url: string = "https://wcom.s4-tastewp.com"; //Website URL through which this plugin will be sold
     const product_name: string = "Wcom Test Product"; //Product Name which will be connected with this plugin
 
-    // await plugin.free_plugin_create(plugin_name);
-    await plugin.pro_plugin_create(plugin_name, website_url, product_name);
+    await plugin.free_plugin_create(free_plugin_name);
+    products_name.push(free_plugin_name);
+
+    await plugin.pro_plugin_create(pro_plugin_name, website_url, product_name);
+    products_name.push(pro_plugin_name);
 
     /* -------- Plugin Update -------- */
     /**
@@ -108,14 +115,13 @@ test("Plugin Create & Update", async ({ page }) => {
 // })
 
 
-// /* ------------------------ Products Delete ------------------------ */
-// test("Prodcut Delete", async ({ page }) => {
+/* ------------------------ Products Delete ------------------------ */
+test("Prodcut Delete", async ({ page }) => {
 
-//     const product = new ProductPage(page);
+    const product = new ProductPage(page);
 
-//     // Product Name could be any valid Plugin/Theme/Bundle name;
-//     let product_name: string = "";
+    for (let i: number = 0; i < products_name.length; i++) {
+        await product.product_delete(products_name[i]);
+    }
 
-//     product.product_delete(product_name);
-
-// })
+})
