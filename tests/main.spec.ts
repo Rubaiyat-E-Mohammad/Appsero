@@ -1,6 +1,7 @@
 import { test } from "@playwright/test";
 import * as data from "../utils/data";
 import * as faker from 'faker';
+import * as fs from "fs";
 
 import { LoginPage } from "../pages/login";
 import { DashboardPage } from "../pages/dashboard";
@@ -11,12 +12,13 @@ import { ProductPage } from "../pages/products";
 
 
 const products_name: string[] = [];
+fs.writeFile('state.json', '{"cookies":[],"origins": []}', function () { });
 
 
 /* ------------------------ Login ------------------------ */
-test("Login", async ({ }) => {
+test("Login", async ({ page }) => {
 
-    const login = new LoginPage();
+    const login = new LoginPage(page);
     await login.login(process.env.USER_NAME, process.env.PASSWORD);
 
 });
