@@ -21,7 +21,6 @@ export class LoginPage {
     await this.page.locator(login_locator.submit).click();
 
     await this.page.waitForLoadState("networkidle");
-    //await this.page.waitForResponse(response => response.status() === 200);
 
     await this.page.context().storageState({ path: 'state.json' });
 

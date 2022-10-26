@@ -23,7 +23,7 @@ export class ProductPage {
     await this.page.locator(product_finding_locator.edit).click();
     await this.page.locator(product_finding_locator.delete).click();
     await this.page.locator(product_finding_locator.yes).click();
-    await this.page.waitForRequest(request => request.method() === 'POST');
+    await this.page.waitForNavigation();
 
   };
 
