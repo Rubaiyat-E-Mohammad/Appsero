@@ -19,7 +19,8 @@ export class LoginPage {
     await page.locator(login_locator.pass).fill(password);
     await page.locator(login_locator.submit).click();
 
-    await page.waitForLoadState("networkidle")
+    await page.waitForLoadState("networkidle");
+    await page.waitForResponse(response => response.status() === 200);
 
     await page.context().storageState({ path: 'state.json' });
 

@@ -39,8 +39,8 @@ test("Plugin Create & Update", async ({ page }) => {
     //Could be any valid plugin name
     const free_plugin_name: string = faker.lorem.words(2); //Auto generated plugin name
     const pro_plugin_name: string = faker.lorem.words(2); //Auto generated plugin name
-    const website_url: string = "https://wcom.s4-tastewp.com"; //Website URL through which this plugin will be sold
-    const product_name: string = "Wcom Test Product"; //Product Name which will be connected with this plugin
+    const website_url: string = "https://wcomtest.s4-tastewp.com"; //Website URL through which this plugin will be sold
+    const product_name: string = "Test Product"; //Product Name which will be connected with this plugin
 
     await plugin.free_plugin_create(free_plugin_name);
     products_name.push(free_plugin_name);
