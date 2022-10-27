@@ -64,7 +64,7 @@ test("Plugin Create & Update", async ({ page }) => {
 })
 
 
-// /* ------------------------ Theme ------------------------ */
+/* ------------------------ Theme ------------------------ */
 // test("Theme Create & Update", async ({ page }) => {
 
 //     const theme = new ThemePage(page);
@@ -117,7 +117,55 @@ test("Plugin Create & Update", async ({ page }) => {
 // })
 
 
-/* ------------------------ Products Delete ------------------------ */
+/* ------------------------ Release CRUD ------------------------ */
+test("Release CRUD", async ({ page }) => {
+
+    const product = new ProductPage(page);
+    const release_versions: string[] = [];
+    const updated_release_versions: string[] = [];
+
+    /* -------- Release Create -------- */
+    for (let i: number = 0; i < products_name.length; i++) {
+        release_versions.push(await product.release_create(products_name[i]));
+    }
+
+    /* -------- Release Update -------- */
+    for (let i: number = 0; i < products_name.length; i++) {
+        updated_release_versions.push(await product.release_update(products_name[i], release_versions[i]));
+    }
+
+    /* -------- Release Delete -------- */
+    for (let i: number = 0; i < products_name.length; i++) {
+        await product.release_delete(products_name[i], updated_release_versions[i]);
+    }
+
+})
+
+
+/* ------------------------ License CRUD ------------------------ */
+// test("License CRUD", async ({ page }) => {
+
+//     const product = new ProductPage(page);
+
+//     /* -------- License Create -------- */
+//     for (let i: number = 0; i < products_name.length; i++) {
+//         await product.license_create(products_name[i]);
+//     }
+
+//     /* -------- License Update -------- */
+//     for (let i: number = 0; i < products_name.length; i++) {
+//         await product.license_update(products_name[i]);
+//     }
+
+//     /* -------- License Delete -------- */
+//     for (let i: number = 0; i < products_name.length; i++) {
+//         await product.license_delete(products_name[i]);
+//     }
+
+// })
+
+
+/* ------------------------ Product Delete ------------------------ */
 test("Prodcut Delete", async ({ page }) => {
 
     const product = new ProductPage(page);

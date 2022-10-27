@@ -39,6 +39,9 @@ class PluginPage {
     await this.page.locator(plugin_locator.next).click();
     await this.page.locator(plugin_locator.done).click();
     await this.page.locator(plugin_locator.complete).click();
+
+    await expect(await this.page.locator(plugin_locator.check_product)).toHaveText("Get Started");
+
   };
 
 
@@ -81,6 +84,8 @@ class PluginPage {
 
     await this.page.locator(plugin_locator.done).click();
     await this.page.locator(plugin_locator.complete).click();
+
+    await expect(await this.page.locator(plugin_locator.check_product)).toHaveText("Get Started");
   };
 
 

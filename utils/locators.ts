@@ -7,7 +7,7 @@ let login_locator: { email, pass, submit: string } = {
 let plugin_locator: {
     navigate, add_plugin, free_plugin, pro_plugin, manual_entry, name, slug, plugin_version, php_version_select, php_version,
     wp_version_select, wp_version, tested_upto_version_select, tested_upto_version, submit, yes, wcom_map, use_appsero, select_website,
-    website_click, select_product, product_click, skip, next, done, complete: string
+    website_click, select_product, product_click, skip, next, done, complete, check_product: string
 } = {
 
     navigate: '//span[text()="Plugins"]',
@@ -38,10 +38,7 @@ let plugin_locator: {
     next: '//span[text()="Next"]',
     done: '//button[contains(text(), "Done")]',
     complete: '//span[contains(text(), "Done")]',
-
-    // Release Locators
-    // release: '//span[text()="Releases"]',
-    // add_new_elease: '//span[text()="Add New Release"]',
+    check_product: '//h1[text()="Get Started"]',
 };
 
 let theme_locator: {
@@ -94,8 +91,9 @@ let bundle_locator: {
 
 let product_finding_locator: {
     search, search_project, settings, edit, update_plugin, plugin_navigate, update_theme, theme_navigate, update_bundle, bundle_navigate,
-    name, version, php_version_select, php_version, wp_version_select, wp_version, tested_upto_version_select, tested_upto_version,
-    delete, yes: string
+    name, version, php_version_select, php_version, wp_version_select, wp_version, tested_upto_version_select, tested_upto_version, delete,
+    yes, releases, new_release, release_version, release_date, date, change_log, checkbox, publish_release, update_release, check_release,
+    update_release_pre, update_release_post, find_release_pre, find_release_post: string
 } = {
 
     search: '.header-project-switch',
@@ -120,6 +118,22 @@ let product_finding_locator: {
 
     delete: '//span[text()="Delete"]',
     yes: '//span[text()="Yes"]',
+
+    releases: '//span[text()="Releases"]',
+    new_release: '//span[text()="Add New Release"]',
+    release_version: '(//input[@id="version"])[2]',
+    release_date: '(//span[@id="release_date"])[2]',
+    date: '//div[text()="15"]',
+    change_log: '(//textarea[@id="change_log"])[2]',
+    checkbox: '(//input[@type="checkbox"])[2]',
+    publish_release: '//span[text()="Publish Release"]',
+    update_release: '//span[text()="Update Release"]',
+    check_release: '//sup[@title="Current"]/../../strong',
+    update_release_pre: '//strong[text()="',
+    update_release_post: '"]/../..//../td[4]/button[@class="mr-8 ant-btn"]',
+    find_release_pre: '//strong[text()="',
+    find_release_post: '"]/../..//../td[4]/button[@class="ant-btn ant-btn-danger"]',
+
 };
 
 let dashboard_locator: {
