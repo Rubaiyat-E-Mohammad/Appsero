@@ -6,8 +6,8 @@ let plugin_data: { plugin_version, php_version, wp_version, tested_upto_version:
 
     plugin_version: faker.finance.amount(0, 9, 1),
     php_version: "7.4",
-    wp_version: "5.6",
-    tested_upto_version: "5.8",
+    wp_version: "4.9",
+    tested_upto_version: "6.6",
 
 };
 
