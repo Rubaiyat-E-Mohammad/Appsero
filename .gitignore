@@ -8,3 +8,4 @@ state.json
 .env
 .vscode
 .DS_Store
+.idea
