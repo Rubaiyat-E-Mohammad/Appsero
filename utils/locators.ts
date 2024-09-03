@@ -8,8 +8,8 @@ let login_locator: { email, pass, submit: string } = {
 
 let plugin_locator: {
     navigate, add_plugin, free_plugin, pro_plugin, manual_entry, name, slug, plugin_version, php_version_select, php_version,
-    wp_version_select, wp_version, tested_upto_version_select, tested_upto_version, submit, yes, wcom_map, use_appsero, select_website,
-    website_click, select_product, product_click, skip, next, done, complete, check_product: string
+    wp_version_select, wp_version, tested_upto_version_select, tested_upto_version, submit, yes, wcom_map, use_appsero, 
+    select_website, website_click, select_product, product_click, skip, next, done, complete, check_product: string
 } = {
 
     navigate: '//span[text()="Plugins"]',
@@ -23,14 +23,10 @@ let plugin_locator: {
 
     php_version_select: '(//div[@class="ant-select-selection__rendered"])[4]',
     php_version: '//li[contains(text(), "7.4")]',
-    //php_version: '(//input[@autocomplete="off"])[1]',
     wp_version_select: '(//div[@class="ant-select-selection__rendered"])[5]',
     wp_version: '//li[contains(text(), "4.9")]',
-    //wp_version: '(//input[@autocomplete="off"])[2]',
     tested_upto_version_select: '(//div[@class="ant-select-selection__rendered"])[6]',
     tested_upto_version: '6.6',
-    //tested_upto_version: '(//input[@autocomplete="off"])[3]',
-
     submit: '//span[text()="Next"]',
     yes: '//span[text()="Yes"]',
     wcom_map: '//p[text()="WooCommerce + WooCommerce API Manager"]',
@@ -48,7 +44,7 @@ let plugin_locator: {
 
 let theme_locator: {
     navigate, add_theme, free_theme, pro_theme, manual_entry, name, slug, theme_version, submit, yes, wcom_map, use_appsero,
-    select_website, select_product, skip, next, done, complete: string
+    select_website, select_product, skip, next, done, complete, check_product: string
 } = {
 
     navigate: '//span[text()="Themes"]',
@@ -59,7 +55,7 @@ let theme_locator: {
     name: '#name',
     slug: '#slug',
     theme_version: '#version',
-    submit: '//button[@type="submit"]',
+    submit: '//span[text()="Next"]',
 
     yes: '//span[text()="Yes"]',
     wcom_map: '//p[text()="WooCommerce + WooCommerce API Manager"]',
@@ -71,6 +67,7 @@ let theme_locator: {
     next: '//span[contains(text(), "Next")]',
     done: '//button[contains(text(), "Done")]',
     complete: '//span[contains(text(), "Done")]',
+    check_product: '//h1[text()="Get Started"]'
 };
 
 let bundle_locator: {
@@ -95,9 +92,10 @@ let bundle_locator: {
 };
 
 let product_finding_locator: {
-    search, search_project, settings, edit, update_plugin, plugin_navigate, update_theme, theme_navigate, update_bundle, bundle_navigate,
-    name, version, php_version_select, php_version, wp_version_select, wp_version, tested_upto_version_select, tested_upto_version, delete,
-    yes, releases, new_release, release_version, release_date, date, change_log, required_plugin, req_plugin_slug, req_plugin_version, filepath, choosefile, variationcheckbox, termscheckbox, publish_release, update_release, check_release,
+    search, search_project, settings, edit, update_plugin, plugin_navigate, update_theme, theme_navigate, update_bundle, 
+    bundle_navigate,name, version, php_version_select, php_version, wp_version_select, wp_version, tested_upto_version_select, 
+    tested_upto_version, delete,yes, releases, new_release, release_version, release_date, date, change_log, required_plugin, 
+    req_plugin_slug, req_plugin_version, filepath, choosefile, termscheckbox, publish_release, update_release, check_release,
     update_release_pre, update_release_post, find_release_pre, find_release_post: string
 } = {
 
@@ -126,7 +124,7 @@ let product_finding_locator: {
 
     releases: '//span[text()="Releases"]',
     new_release: '//span[text()="Add New Release"]',
-    release_version: '(//input[@placeholder="Enter version"])[2]', 
+    release_version: '(//input[@placeholder="Enter version"])[2]',
     release_date: '(//input[@placeholder="Select release date"])[2]',
     date: '//div[text()="15"]',
     change_log: '(//textarea[@placeholder="Write changelog about this release here."])[2]',
@@ -135,7 +133,6 @@ let product_finding_locator: {
     req_plugin_version: '(//input[@placeholder="Enter plugin version"])[1]',
     filepath: 'File Path',
     choosefile: '(//input[@type="file"])',
-    variationcheckbox: '(//span[contains(text(),"Use This File For All Variation")])[2]',
     termscheckbox: '(//span[contains(text(),"I have added a")])[2]',
     publish_release: '//span[text()="Publish Release"]',
     update_release: '//span[text()="Update Release"]',
@@ -180,10 +177,10 @@ let dashboard_locator: {
 
 };
 
-let generateVersionNumber: {major, minor, patch : string} = {
-    major : faker.datatype.number({ min: 0, max: 9 }),
-    minor : faker.datatype.number({ min: 0, max: 9 }),
-    patch : faker.datatype.number({ min: 0, max: 9 })
+let generateVersionNumber: { major, minor, patch: string } = {
+    major: faker.datatype.number({ min: 0, max: 9 }),
+    minor: faker.datatype.number({ min: 0, max: 9 }),
+    patch: faker.datatype.number({ min: 0, max: 9 })
 };
 
 export { login_locator, plugin_locator, theme_locator, bundle_locator, product_finding_locator, dashboard_locator, generateVersionNumber };

@@ -13,27 +13,6 @@ export class ProductPage{
     this.page = page;
   }
 
-  async product_delete(product_name) {
-
-    await this.page.goto(process.env.BASE_URL as string);
-    await this.page.waitForLoadState("networkidle");
-
-    await this.page.locator(product_finding_locator.search).hover();
-    await this.page.locator(product_finding_locator.search_project).click();
-    await this.page.locator(product_finding_locator.search_project).fill(product_name);
-    await this.page.locator('//h3[text()="' + product_name + '"]').click();
-
-    const helper = new HelperFunctions(this.page);
-    await helper.skipBilling();
-
-    await this.page.locator(product_finding_locator.settings).click();
-    await this.page.locator(product_finding_locator.edit).click();
-    await this.page.locator(product_finding_locator.delete).click();
-    await this.page.locator(product_finding_locator.yes).click();
-
-  };
-
-
   async release_create(product_name) {
 
     await this.page.goto(process.env.BASE_URL as string);
@@ -75,7 +54,6 @@ export class ProductPage{
     await expect(this.page.locator(fileupload)).toBeHidden;
     await this.page.locator(fileupload).setInputFiles(path.join(__dirname, '../uploads/WooCommercePluginTest.zip'));
 
-    //await this.page.locator(product_finding_locator.variationcheckbox).click();
     await this.page.locator(product_finding_locator.termscheckbox).click();
     await (await this.page.waitForSelector(product_finding_locator.publish_release)).click();
 
@@ -132,7 +110,6 @@ export class ProductPage{
     await expect(this.page.locator(fileupload)).toBeHidden;
     await this.page.locator(fileupload).setInputFiles(path.join(__dirname, '../uploads/WooCommercePluginTest.zip'));
     
-    //await this.page.locator(product_finding_locator.variationcheckbox).click();
     await this.page.locator(product_finding_locator.termscheckbox).click();
     await (await this.page.waitForSelector(product_finding_locator.update_release)).click();;
 
@@ -258,6 +235,26 @@ export class ProductPage{
     await this.page.locator(product_finding_locator.publish_release).click();
 
     await expect(await this.page.locator(product_finding_locator.check_release)).toHaveText(version);
+
+  };
+
+  async product_delete(product_name) {
+
+    await this.page.goto(process.env.BASE_URL as string);
+    await this.page.waitForLoadState("networkidle");
+
+    await this.page.locator(product_finding_locator.search).hover();
+    await this.page.locator(product_finding_locator.search_project).click();
+    await this.page.locator(product_finding_locator.search_project).fill(product_name);
+    await this.page.locator('//h3[text()="' + product_name + '"]').click();
+
+    const helper = new HelperFunctions(this.page);
+    await helper.skipBilling();
+
+    await this.page.locator(product_finding_locator.settings).click();
+    await this.page.locator(product_finding_locator.edit).click();
+    await this.page.locator(product_finding_locator.delete).click();
+    await this.page.locator(product_finding_locator.yes).click();
 
   };
 

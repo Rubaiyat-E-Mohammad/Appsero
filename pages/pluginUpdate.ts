@@ -27,8 +27,6 @@ class PluginUpdate{
     await this.page.locator(product_finding_locator.edit).click();
 
     await this.page.locator(plugin_locator.name).fill(new_plugin_name);
-    // await this.page.locator(plugin_locator.slug).fill(((new_plugin_name.split(" ")).join("_")).toLowerCase());
-
     await this.page.locator(product_finding_locator.update_plugin).click();
     
 

@@ -1,9 +1,8 @@
-import { Page } from '@playwright/test';
-import * as faker from 'faker';
-import { theme_locator, product_finding_locator } from '../utils/locators';
+import { expect, Page } from '@playwright/test';
+import { theme_locator } from '../utils/locators';
 
 
-export class ThemePage {
+export class ThemeCreate {
   readonly page: Page;
 
   constructor(page: Page) {
@@ -21,14 +20,14 @@ export class ThemePage {
     await this.page.locator(theme_locator.name).fill(theme_name);
     await this.page.locator(theme_locator.slug).fill(((theme_name.split(" ")).join("_")).toLowerCase());
 
-    await this.page.locator(theme_locator.theme_version).fill(faker.finance.amount(0, 9, 1));
-
     await this.page.locator(theme_locator.submit).click();
     await this.page.locator(theme_locator.skip).click();
     await this.page.locator(theme_locator.skip).click();
     await this.page.locator(theme_locator.next).click();
     await this.page.locator(theme_locator.done).click();
     await this.page.locator(theme_locator.complete).click();
+
+    await expect(await this.page.locator(theme_locator.check_product)).toHaveText("Get Started");
   };
 
 
@@ -41,8 +40,6 @@ export class ThemePage {
 
     await this.page.locator(theme_locator.name).fill(theme_name);
     await this.page.locator(theme_locator.slug).fill(((theme_name.split(" ")).join("_")).toLowerCase());
-
-    await this.page.locator(theme_locator.theme_version).fill(faker.finance.amount(0, 9, 1));
     await this.page.locator(theme_locator.submit).click();
 
     await this.page.locator(theme_locator.yes).click();
@@ -54,27 +51,13 @@ export class ThemePage {
     await this.page.locator('//li[contains(text(),"' + product_name + '")]').click();
 
     await this.page.locator(theme_locator.next).click();
+    await expect(this.page.locator('//h2[text()="Installation Method"]')).toHaveText("Installation Method");
     await this.page.locator(theme_locator.next).click();
     await this.page.locator(theme_locator.done).click();
     await this.page.locator(theme_locator.complete).click();
 
-  };
-
-
-  async theme_update(updateable_theme_name, new_theme_name) {
-
-    await this.page.goto(process.env.BASE_URL as string);
-    await this.page.locator(product_finding_locator.theme_navigate).click();
-    await this.page.locator(product_finding_locator.search).hover();
-    await this.page.locator(product_finding_locator.search_project).click();
-    await this.page.locator(product_finding_locator.search_project).fill(updateable_theme_name);
-    await this.page.locator('(//h3[text()="' + updateable_theme_name + '"])[1]').click();
-    await this.page.locator(product_finding_locator.settings).click();
-    await this.page.locator(product_finding_locator.edit).click();
-
-    await this.page.locator(product_finding_locator.name).fill(new_theme_name);
-    await this.page.locator(product_finding_locator.version).fill(faker.finance.amount(0, 9, 1));
-    await this.page.locator(product_finding_locator.update_theme).click();
+    await expect(await this.page.locator(theme_locator.check_product)).toHaveText("Get Started");
 
   };
+
 }

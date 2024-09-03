@@ -9,13 +9,16 @@ dotenv.config();
 import { LoginPage } from "../pages/login";
 import { DashboardPage } from "../pages/dashboard";
 import { PluginCreate } from "../pages/pluginCreate";
-import { ThemePage } from "../pages/theme";
+import { ThemeCreate } from "../pages/themeCreate";
 import { BundlePage } from "../pages/bundle";
 import { ProductPage } from "../pages/products";
 import { PluginUpdate } from "../pages/pluginUpdate";
+import { ThemeUpdate } from "../pages/themeUpdate";
 
 
-const products_name: string[] = [];
+const plugins_name: string[] = [];
+const themes_name: string[] = [];
+const bundles_name: string[] = [];
 const release_versions: string[] = [];
 const updated_release_versions: string[] = [];
 fs.writeFile('state.json', '{"cookies":[],"origins": []}', function () { });
@@ -47,7 +50,7 @@ test("Free Plugin Create", async ({ page }) => {
     const free_plugin_name: string = faker.lorem.words(2); //Auto generated plugin name
 
     await plugin.free_plugin_create(free_plugin_name);
-    products_name.push(free_plugin_name);
+    plugins_name.push(free_plugin_name);
 
 })
 
@@ -60,7 +63,7 @@ test("Pro Plugin Create", async ({ page }) => {
     const product_name: string = "WooCommercePluginTest"; //Product Name which will be connected with this plugin
 
     await plugin.pro_plugin_create(pro_plugin_name, website_url, product_name);
-    products_name.push(pro_plugin_name);
+    plugins_name.push(pro_plugin_name);
 
 })
 
@@ -68,38 +71,47 @@ test("Pro Plugin Create", async ({ page }) => {
 test("Plugin Update", async ({ page }) => {
 
     const plugin = new PluginUpdate(page);
-    for (let i: number = 0; i < products_name.length; i++) {
+    for (let i: number = 0; i < plugins_name.length; i++) {
         const new_plugin_name: string = faker.lorem.words(2);
-        await plugin.plugin_update(products_name[i], new_plugin_name);
-        products_name[i] = new_plugin_name;
+        await plugin.plugin_update(plugins_name[i], new_plugin_name);
+        plugins_name[i] = new_plugin_name;
     }
 })
 
 
-/* ------------------------ Theme ------------------------ */
-// test("Theme Create & Update", async ({ page }) => {
+/* ------------------------ Free Theme Create ------------------------ */
+test("Free Theme Create", async ({ page }) => {
 
-//     const theme = new ThemePage(page);
+    const theme = new ThemeCreate(page);
+    const free_theme_name: string = faker.lorem.words(2); //Auto generated theme name
+    await theme.free_theme_create(free_theme_name);
+    themes_name.push(free_theme_name);
 
-//     //Could be any valid theme name
-//     const theme_name: string = faker.lorem.words(2); //Auto generated theme name
-//     const website_url: string = ""; //Website URL through which this theme will be sold
-//     const product_name: string = ""; //Product Name which will be connected with this theme
+})
 
-//     theme.free_theme_create(theme_name);
-//     theme.pro_theme_create(theme_name, website_url, product_name);
+/* ------------------------ Pro Theme Create ------------------------ */
+test("Pro Theme Create", async ({ page }) => {
 
-//     /* -------- Theme Update -------- */
-//     /**
-//      * updateable_theme_name = Any valid existing theme name and this theme will be updated
-//      * new_theme_name = New Theme Name
-//      */
+    const theme = new ThemeCreate(page);
+    const pro_theme_name: string = faker.lorem.words(2); //Auto generated theme name
+    const website_url: string = "https://unsolvable-dare-fancy.flywp.xyz"; //Website URL through which this theme will be sold
+    const theme_name: string = "WooCommerceThemeTest"; //Product Name which will be connected with this theme
 
-//     let updateable_theme_name: string = "Automated Plugin"; //Any existing theme name
-//     let new_theme_name: string = "Automated Plugin"; //Any valid theme name
-//     await theme.theme_update(updateable_theme_name, new_theme_name);
+    await theme.pro_theme_create(pro_theme_name, website_url, theme_name);
+    themes_name.push(pro_theme_name);
 
-// })
+})
+
+/* ------------------------ Theme Update------------------------ */
+test("Theme Update", async ({ page }) => {
+
+    const theme = new ThemeUpdate(page);
+    for (let i: number = 0; i < themes_name.length; i++) {
+        const new_theme_name: string = faker.lorem.words(2);
+        await theme.theme_update(themes_name[i], new_theme_name);
+        themes_name[i] = new_theme_name;
+    }
+})
 
 
 // /* ------------------------ Bundle ------------------------ */
@@ -134,8 +146,8 @@ test("Release Create", async ({ page }) => {
 
     const product = new ProductPage(page);
 
-    for (let i: number = 0; i < products_name.length; i++) {
-        release_versions.push(await product.release_create(products_name[i]));
+    for (let i: number = 0; i < plugins_name.length; i++) {
+        release_versions.push(await product.release_create(plugins_name[i]));
     }
 
 })
@@ -145,8 +157,8 @@ test("Release Update", async ({ page }) => {
 
     const product = new ProductPage(page);
 
-    for (let i: number = 0; i < products_name.length; i++) {
-        updated_release_versions.push(await product.release_update(products_name[i], release_versions[i]));
+    for (let i: number = 0; i < plugins_name.length; i++) {
+        updated_release_versions.push(await product.release_update(plugins_name[i], release_versions[i]));
     }
 
 })
@@ -156,8 +168,8 @@ test("Release Delete", async ({ page }) => {
 
     const product = new ProductPage(page);
 
-    for (let i: number = 0; i < products_name.length; i++) {
-        await product.release_delete(products_name[i], updated_release_versions[i]);
+    for (let i: number = 0; i < plugins_name.length; i++) {
+        await product.release_delete(plugins_name[i], updated_release_versions[i]);
     }
 
 })
@@ -187,12 +199,12 @@ test("Release Delete", async ({ page }) => {
 
 
 /* ------------------------ Product Delete ------------------------ */
-test("Prodcut Delete", async ({ page }) => {
+test("Plugin Delete", async ({ page }) => {
 
     const product = new ProductPage(page);
 
-    for (let i: number = 0; i < products_name.length; i++) {
-        await product.product_delete(products_name[i]);
+    for (let i: number = 0; i < plugins_name.length; i++) {
+        await product.product_delete(plugins_name[i]);
     }
 
 })

@@ -1,6 +1,5 @@
 import { expect, Page } from '@playwright/test';
-import { plugin_locator, product_finding_locator } from '../utils/locators';
-import { HelperFunctions } from '../utils/helperFunctions';
+import { plugin_locator } from '../utils/locators';
 
 class PluginCreate{
   readonly page: Page;
@@ -18,7 +17,6 @@ class PluginCreate{
     await this.page.locator(plugin_locator.add_plugin).click();
     await this.page.locator(plugin_locator.free_plugin).click();
     await this.page.locator(plugin_locator.manual_entry).click();
-    //await this.page.pause();
 
     await this.page.locator(plugin_locator.name).fill(plugin_name);
     await this.page.locator(plugin_locator.slug).fill(((plugin_name.split(" ")).join("_")).toLowerCase());
