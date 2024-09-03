@@ -1,12 +1,12 @@
-name: Playwright Tests
+name: Appsero Staging Site Tests
 on:
   workflow_dispatch:
   schedule:
     - cron: "0 3 * * *"
-  push:
-    branches: [main]
+  #push:
+  # branches: [main]
   # pull_request:
-  #   branches: [ main, master ]
+  #   branches: [ main ]
 jobs:
   test:
     timeout-minutes: 60
@@ -29,13 +29,11 @@ jobs:
           BASE_URL: ${{ secrets.BASE_URL }}
       - name: Save Screenshots
         uses: actions/upload-artifact@v3
-        # if: always()
+        if: failure()
         with:
           name: test-results
           path: test-results/
           retention-days: 30
-      
-    
       - name: Send Test Report on email
         if: success()
         uses: dawidd6/action-send-mail@v3
@@ -49,9 +47,9 @@ jobs:
           # email subject
           subject: ${{ github.job }} job of ${{ github.repository }} has ${{ job.status }}
           # email body as text
-          body: ${{ github.job }} job in worflow ${{ github.workflow }} of ${{ github.repository }} has ${{ job.status }}. This test is conducted on Appsero Production server. The attached index.html file will give the details report.
+          body: ${{ github.job }} job in workflow ${{ github.workflow }} of ${{ github.repository }} has ${{ job.status }}. This test is conducted on Appsero Staging site. The attached index.html file will give the details report.
           # comma-separated string, send email to
-          to: tons2468@gmail.com
+          to: saif@wedevs.com,farazi@wedevs.com,tons2468@gmail.com
           # from email name
           from: Appsero UI Automation Test
           attachments: ./playwright-report/index.html
