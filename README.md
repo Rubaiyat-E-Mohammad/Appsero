@@ -35,7 +35,7 @@ Run the followings in a terminal/command line window
 cd tests
 ```
 
--   `npm install` to install the required dependencies (@playwright/test, dotenv, @faker-js/faker)
+-   `npm i` to install the required dependencies (@playwright/test, dotenv, @faker-js/faker)
 
 Make a .env file according to .env.example file
 
