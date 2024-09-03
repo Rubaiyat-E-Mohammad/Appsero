@@ -1,3 +1,5 @@
+import * as faker from 'faker';
+
 let login_locator: { email, pass, submit: string } = {
     email: '//input[@type="email"]',
     pass: '//input[@type="password"]',
@@ -19,14 +21,17 @@ let plugin_locator: {
     slug: '#slug',
     plugin_version: '#version',
 
-    php_version_select: '(//div[@class="ant-select-selection__rendered"])[1]',
-    php_version: '(//input[@autocomplete="off"])[1]',
-    wp_version_select: '(//div[@class="ant-select-selection__rendered"])[2]',
-    wp_version: '(//input[@autocomplete="off"])[2]',
-    tested_upto_version_select: '(//div[@class="ant-select-selection__rendered"])[3]',
-    tested_upto_version: '(//input[@autocomplete="off"])[3]',
+    php_version_select: '(//div[@class="ant-select-selection__rendered"])[4]',
+    php_version: '//li[contains(text(), "7.4")]',
+    //php_version: '(//input[@autocomplete="off"])[1]',
+    wp_version_select: '(//div[@class="ant-select-selection__rendered"])[5]',
+    wp_version: '//li[contains(text(), "4.9")]',
+    //wp_version: '(//input[@autocomplete="off"])[2]',
+    tested_upto_version_select: '(//div[@class="ant-select-selection__rendered"])[6]',
+    tested_upto_version: '6.6',
+    //tested_upto_version: '(//input[@autocomplete="off"])[3]',
 
-    submit: '//button[@type="submit"]',
+    submit: '//span[text()="Next"]',
     yes: '//span[text()="Yes"]',
     wcom_map: '//p[text()="WooCommerce + WooCommerce API Manager"]',
     use_appsero: '//strong[text()="Use Appsero"]',
@@ -35,7 +40,7 @@ let plugin_locator: {
     select_product: '//div[text()="Select Product"]',
     product_click: '//li[text()=" Test Product 1 "]',
     skip: '//a[contains(text(), "Skip")]',
-    next: '//span[text()="Next"]',
+    next: '//span[normalize-space(text())="Next"]',
     done: '//button[contains(text(), "Done")]',
     complete: '//span[contains(text(), "Done")]',
     check_product: '//h1[text()="Get Started"]',
@@ -92,7 +97,7 @@ let bundle_locator: {
 let product_finding_locator: {
     search, search_project, settings, edit, update_plugin, plugin_navigate, update_theme, theme_navigate, update_bundle, bundle_navigate,
     name, version, php_version_select, php_version, wp_version_select, wp_version, tested_upto_version_select, tested_upto_version, delete,
-    yes, releases, new_release, release_version, release_date, date, change_log, checkbox, publish_release, update_release, check_release,
+    yes, releases, new_release, release_version, release_date, date, change_log, required_plugin, req_plugin_slug, req_plugin_version, filepath, choosefile, variationcheckbox, termscheckbox, publish_release, update_release, check_release,
     update_release_pre, update_release_post, find_release_pre, find_release_post: string
 } = {
 
@@ -121,11 +126,17 @@ let product_finding_locator: {
 
     releases: '//span[text()="Releases"]',
     new_release: '//span[text()="Add New Release"]',
-    release_version: '(//input[@id="version"])[2]',
-    release_date: '(//span[@id="release_date"])[2]',
+    release_version: '(//input[@placeholder="Enter version"])[2]', 
+    release_date: '(//input[@placeholder="Select release date"])[2]',
     date: '//div[text()="15"]',
-    change_log: '(//textarea[@id="change_log"])[2]',
-    checkbox: '(//input[@type="checkbox"])[2]',
+    change_log: '(//textarea[@placeholder="Write changelog about this release here."])[2]',
+    required_plugin: '(//span[contains(text(),"Add Required Plugin")])[2]',
+    req_plugin_slug: '(//input[@placeholder="Enter plugin slug"])[1]',
+    req_plugin_version: '(//input[@placeholder="Enter plugin version"])[1]',
+    filepath: 'File Path',
+    choosefile: '(//input[@type="file"])',
+    variationcheckbox: '(//span[contains(text(),"Use This File For All Variation")])[2]',
+    termscheckbox: '(//span[contains(text(),"I have added a")])[2]',
     publish_release: '//span[text()="Publish Release"]',
     update_release: '//span[text()="Update Release"]',
     check_release: '//sup[@title="Current"]/../../strong',
@@ -139,7 +150,7 @@ let product_finding_locator: {
 let dashboard_locator: {
     plugin_count, theme_count, bundle_count, net_revenue, number_of_orders, total_active_licenses, deactivations, refunds,
     top_selling_product, top_deactivation_reason, new_installs, total_installs, revenue_via_coupon, avg_order_value, todays_revenue,
-    todays_new_subscriptions, todays_new_orders, todays_refunds: string
+    todays_new_subscriptions, todays_new_orders, todays_refunds, skip_billing: string
 } = {
 
     plugin_count: '//p[text()="Plugins"]/../h3[@class="project-number"]',
@@ -165,6 +176,14 @@ let dashboard_locator: {
     todays_new_orders: '//h2[text()="New Orders"]/../div/span',
     todays_refunds: '(//h2[text()="Refunds"]/../div/span)[2]',
 
+    skip_billing: '//span[normalize-space()="Skip for now"]'
+
 };
 
-export { login_locator, plugin_locator, theme_locator, bundle_locator, product_finding_locator, dashboard_locator };
+let generateVersionNumber: {major, minor, patch : string} = {
+    major : faker.datatype.number({ min: 0, max: 9 }),
+    minor : faker.datatype.number({ min: 0, max: 9 }),
+    patch : faker.datatype.number({ min: 0, max: 9 })
+};
+
+export { login_locator, plugin_locator, theme_locator, bundle_locator, product_finding_locator, dashboard_locator, generateVersionNumber };

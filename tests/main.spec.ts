@@ -1,17 +1,23 @@
 import { test } from "@playwright/test";
-import * as data from "../utils/data";
 import * as faker from 'faker';
 import * as fs from "fs";
+import * as dotenv from 'dotenv';
+
+// Load environment variables from .env file
+dotenv.config();
 
 import { LoginPage } from "../pages/login";
 import { DashboardPage } from "../pages/dashboard";
-import { PluginPage } from "../pages/plugin";
+import { PluginCreate } from "../pages/pluginCreate";
 import { ThemePage } from "../pages/theme";
 import { BundlePage } from "../pages/bundle";
 import { ProductPage } from "../pages/products";
+import { PluginUpdate } from "../pages/pluginUpdate";
 
 
 const products_name: string[] = [];
+const release_versions: string[] = [];
+const updated_release_versions: string[] = [];
 fs.writeFile('state.json', '{"cookies":[],"origins": []}', function () { });
 
 
@@ -20,6 +26,7 @@ test("Login", async ({ page }) => {
 
     const login = new LoginPage(page);
     await login.login(process.env.USER_NAME, process.env.PASSWORD);
+
 
 });
 
@@ -33,34 +40,39 @@ test("Getting Dashboard Overview Details", async ({ page }) => {
 });
 
 
-/* ------------------------ Plugin ------------------------ */
-test("Plugin Create & Update", async ({ page }) => {
+/* ------------------------ Free Plugin Create------------------------ */
+test("Free Plugin Create", async ({ page }) => {
 
-    const plugin = new PluginPage(page);
-
-    //Could be any valid plugin name
+    const plugin = new PluginCreate(page);
     const free_plugin_name: string = faker.lorem.words(2); //Auto generated plugin name
-    const pro_plugin_name: string = faker.lorem.words(2); //Auto generated plugin name
-    const website_url: string = "https://wcomtest.s4-tastewp.com"; //Website URL through which this plugin will be sold
-    const product_name: string = "Test Product"; //Product Name which will be connected with this plugin
 
     await plugin.free_plugin_create(free_plugin_name);
     products_name.push(free_plugin_name);
 
+})
+
+/* ------------------------ Pro Plugin Create------------------------ */
+test("Pro Plugin Create", async ({ page }) => {
+
+    const plugin = new PluginCreate(page);
+    const pro_plugin_name: string = faker.lorem.words(2); //Auto generated plugin name
+    const website_url: string = "https://unsolvable-dare-fancy.flywp.xyz"; //Website URL through which this plugin will be sold
+    const product_name: string = "WooCommercePluginTest"; //Product Name which will be connected with this plugin
+
     await plugin.pro_plugin_create(pro_plugin_name, website_url, product_name);
     products_name.push(pro_plugin_name);
 
-    /* -------- Plugin Update -------- */
-    /**
-    * updateable_plugin_name = Any valid existing plugin name and this plugin will be updated
-    * new_plugin_name = New Plugin Name
-    * data.plugin_data = this "updateable_plugin_name" plugin will be updated with this new data
-    */
+})
 
-    // let updateable_plugin_name: string = ""; //Any existing plugin name
-    // let new_plugin_name: string = ""; //Any valid plugin name
-    // await plugin.plugin_update(data.plugin_data, updateable_plugin_name, new_plugin_name);
+/* ------------------------ Plugin Update------------------------ */
+test("Plugin Update", async ({ page }) => {
 
+    const plugin = new PluginUpdate(page);
+    for (let i: number = 0; i < products_name.length; i++) {
+        const new_plugin_name: string = faker.lorem.words(2);
+        await plugin.plugin_update(products_name[i], new_plugin_name);
+        products_name[i] = new_plugin_name;
+    }
 })
 
 
@@ -117,24 +129,33 @@ test("Plugin Create & Update", async ({ page }) => {
 // })
 
 
-/* ------------------------ Release CRUD ------------------------ */
-test("Release CRUD", async ({ page }) => {
+/* ------------------------ Release Create ------------------------ */
+test("Release Create", async ({ page }) => {
 
     const product = new ProductPage(page);
-    const release_versions: string[] = [];
-    const updated_release_versions: string[] = [];
 
-    /* -------- Release Create -------- */
     for (let i: number = 0; i < products_name.length; i++) {
         release_versions.push(await product.release_create(products_name[i]));
     }
 
-    /* -------- Release Update -------- */
+})
+
+/* ------------------------ Release Update ------------------------ */
+test("Release Update", async ({ page }) => {
+
+    const product = new ProductPage(page);
+
     for (let i: number = 0; i < products_name.length; i++) {
         updated_release_versions.push(await product.release_update(products_name[i], release_versions[i]));
     }
 
-    /* -------- Release Delete -------- */
+})
+
+/* ------------------------ Release Delete ------------------------ */
+test("Release Delete", async ({ page }) => {
+
+    const product = new ProductPage(page);
+
     for (let i: number = 0; i < products_name.length; i++) {
         await product.release_delete(products_name[i], updated_release_versions[i]);
     }

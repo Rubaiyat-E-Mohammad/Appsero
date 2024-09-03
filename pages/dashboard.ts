@@ -1,5 +1,4 @@
 import { Page } from '@playwright/test';
-import { base_url } from '../utils/data';
 import { dashboard_locator } from '../utils/locators';
 import * as fs from 'fs';
 
@@ -18,7 +17,7 @@ class DashboardPage {
             todays_revenue, todays_new_subscriptions, todays_new_orders, todays_refunds: string
         }[] = [];
 
-        await this.page.goto(base_url);
+        await this.page.goto(process.env.BASE_URL as string);
         await this.page.waitForLoadState("networkidle");
 
         /* ---- Data Scrapping ---- */

@@ -1,6 +1,5 @@
 import { Page } from '@playwright/test';
 import * as faker from 'faker';
-import { base_url } from '../utils/data';
 import { theme_locator, product_finding_locator } from '../utils/locators';
 
 
@@ -13,7 +12,7 @@ export class ThemePage {
 
   async free_theme_create(theme_name) {
 
-    await this.page.goto(base_url);
+    await this.page.goto(process.env.BASE_URL as string);
     await this.page.locator(theme_locator.navigate).click();
     await this.page.locator(theme_locator.add_theme).click();
     await this.page.locator(theme_locator.free_theme).click();
@@ -35,7 +34,7 @@ export class ThemePage {
 
   async pro_theme_create(theme_name, website_url, product_name) {
 
-    await this.page.goto(base_url);
+    await this.page.goto(process.env.BASE_URL as string);
     await this.page.locator(theme_locator.navigate).click();
     await this.page.locator(theme_locator.add_theme).click();
     await this.page.locator(theme_locator.pro_theme).click();
@@ -64,7 +63,7 @@ export class ThemePage {
 
   async theme_update(updateable_theme_name, new_theme_name) {
 
-    await this.page.goto(base_url);
+    await this.page.goto(process.env.BASE_URL as string);
     await this.page.locator(product_finding_locator.theme_navigate).click();
     await this.page.locator(product_finding_locator.search).hover();
     await this.page.locator(product_finding_locator.search_project).click();

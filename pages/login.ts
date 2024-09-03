@@ -1,5 +1,4 @@
 import { Page } from "@playwright/test";
-import { base_url } from "../utils/data";
 import { login_locator } from "../utils/locators";
 
 
@@ -14,7 +13,7 @@ export class LoginPage {
 
   async login(user_name, password) {
 
-    await this.page.goto(base_url);
+    await this.page.goto(process.env.BASE_URL as string);
 
     await this.page.locator(login_locator.email).fill(user_name);
     await this.page.locator(login_locator.pass).fill(password);

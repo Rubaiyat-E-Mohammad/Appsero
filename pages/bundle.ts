@@ -1,5 +1,4 @@
 import { Page } from '@playwright/test';
-import { base_url } from '../utils/data';
 import { bundle_locator, product_finding_locator } from '../utils/locators';
 
 
@@ -12,7 +11,7 @@ export class BundlePage {
 
   async bundle_create(bundle_name, website_url, product_name, bundle_products) {
 
-    await this.page.goto(base_url);
+    await this.page.goto(process.env.BASE_URL as string);
     await this.page.locator(bundle_locator.navigate).click();
     await this.page.locator(bundle_locator.add_bundle).click();
     await this.page.locator(bundle_locator.name).fill(bundle_name);
@@ -39,7 +38,7 @@ export class BundlePage {
 
   async bundle_update(updateable_bundle_name, new_bundle_name) {
 
-    await this.page.goto(base_url);
+    await this.page.goto(process.env.BASE_URL as string);
     await this.page.locator(product_finding_locator.bundle_navigate).click();
     await this.page.locator(product_finding_locator.search).hover();
     await this.page.locator(product_finding_locator.search_project).click();

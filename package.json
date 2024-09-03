@@ -1,17 +1,21 @@
 {
   "name": "appsero",
   "version": "1.0.0",
-  "description": "",
+  "description": "e2e automation coverage for Appsero Project ",
   "main": "index.js",
   "scripts": {},
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "@playwright/test": "^1.27.1"
+    "@faker-js/faker": "^8.4.1",
+    "@playwright/test": "^1.46.1",
+    "@types/faker": "^6.6.9",
+    "@types/node": "^22.5.1"
   },
   "dependencies": {
-    "dotenv": "^16.0.3",
-    "faker": "^5.5.3"
+    "dotenv": "^16.4.5",
+    "faker": "^5.5.3",
+    "playwright": "^1.46.1"
   }
 }
