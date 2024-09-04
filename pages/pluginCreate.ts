@@ -52,6 +52,7 @@ class PluginCreate{
     await this.page.locator(plugin_locator.use_appsero).click();
     await this.page.locator(plugin_locator.select_website).click();
     await this.page.locator('//li[contains(text(),"' + website_url + '")]').click();
+    await this.page.waitForLoadState("networkidle");
     await this.page.locator(plugin_locator.select_product).click();
     await this.page.locator('//li[contains(text(),"' + product_name + '")]').click();
 

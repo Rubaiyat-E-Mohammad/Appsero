@@ -10,7 +10,8 @@ export class HelperFunctions {
 
   async skipBilling() {
     try {
-      await this.page.waitForSelector(dashboard_locator.skip_billing, { state: 'visible', timeout: 2000 });
+      await this.page.waitForLoadState("networkidle");
+      await this.page.waitForSelector(dashboard_locator.skip_billing, { state: 'visible', timeout: 3000 });
       const skipBillingLocator = this.page.locator(dashboard_locator.skip_billing);
       const isInViewport = await skipBillingLocator.isVisible();
 

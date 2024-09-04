@@ -1,8 +1,8 @@
-import { Page } from '@playwright/test';
+import { Page, expect } from '@playwright/test';
 import { bundle_locator, product_finding_locator } from '../utils/locators';
 
 
-export class BundlePage {
+export class BundleCreate {
   readonly page: Page;
 
   constructor(page: Page) {
@@ -17,9 +17,11 @@ export class BundlePage {
     await this.page.locator(bundle_locator.name).fill(bundle_name);
     await this.page.locator(bundle_locator.slug).fill(((bundle_name.split(" ")).join("_")).toLowerCase());
 
-    await this.page.locator(bundle_locator.select_products).click();
     for (let i: number = 0; i < bundle_products.length; i++) {
+      await this.page.locator(bundle_locator.select_products).click();
       await this.page.locator('//div[text()=" ' + bundle_products[i] + ' "]').click();
+      (await this.page.waitForSelector(bundle_locator.select_variation)).click();
+      await this.page.getByText('month').click();
     }
 
     await this.page.locator(bundle_locator.submit).click();
@@ -35,19 +37,4 @@ export class BundlePage {
 
   };
 
-
-  async bundle_update(updateable_bundle_name, new_bundle_name) {
-
-    await this.page.goto(process.env.BASE_URL as string);
-    await this.page.locator(product_finding_locator.bundle_navigate).click();
-    await this.page.locator(product_finding_locator.search).hover();
-    await this.page.locator(product_finding_locator.search_project).click();
-    await this.page.locator(product_finding_locator.search_project).fill(updateable_bundle_name);
-    await this.page.locator('(//h3[text()="' + updateable_bundle_name + '"])[1]').click();
-    await this.page.locator(product_finding_locator.settings).click();
-    await this.page.locator(product_finding_locator.edit).click();
-    await this.page.locator(product_finding_locator.name).fill(new_bundle_name);
-    await this.page.locator(product_finding_locator.update_bundle).click();
-
-  }
 }

@@ -1,5 +1,36 @@
 {
-  "cookies": [],
+  "cookies": [
+    {
+      "name": "m",
+      "value": "9cd40f1b-6804-44f6-b9d9-9af5a79e5e9285a505",
+      "domain": "m.stripe.com",
+      "path": "/",
+      "expires": 1760008680.862572,
+      "httpOnly": true,
+      "secure": true,
+      "sameSite": "None"
+    },
+    {
+      "name": "__stripe_mid",
+      "value": "67020459-6320-488d-aa28-946a446e8639ca2016",
+      "domain": ".staging.appsero.com",
+      "path": "/",
+      "expires": 1756984680,
+      "httpOnly": false,
+      "secure": true,
+      "sameSite": "Strict"
+    },
+    {
+      "name": "__stripe_sid",
+      "value": "a70b03b8-424a-4664-9999-a0ee6fe009ef5861c3",
+      "domain": ".staging.appsero.com",
+      "path": "/",
+      "expires": 1725450480,
+      "httpOnly": false,
+      "secure": true,
+      "sameSite": "Strict"
+    }
+  ],
   "origins": [
     {
       "origin": "https://staging.appsero.com",

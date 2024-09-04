@@ -71,7 +71,7 @@ let theme_locator: {
 };
 
 let bundle_locator: {
-    navigate, add_bundle, name, slug, select_products, submit, yes, wcom_map, use_appsero,
+    navigate, add_bundle, name, slug, select_products, select_variation, submit, yes, wcom_map, use_appsero,
     select_website, select_product, next: string
 } = {
 
@@ -79,8 +79,9 @@ let bundle_locator: {
     add_bundle: '(//span[text()="Add Bundles"])[1]',
     name: '#name',
     slug: '#slug',
-    select_products: '//div[text()="Select products"]',
-    submit: '//button[@type="submit"]',
+    select_products: '(//div[@class="ant-select-selection__rendered"])[1]',
+    select_variation: '(//div[@class="ant-select-selection__rendered"])[2]',
+    submit: '//span[text()="Next"]',
 
     yes: '//span[text()="Yes"]',
     wcom_map: '//p[text()="WooCommerce + WooCommerce API Manager"]',

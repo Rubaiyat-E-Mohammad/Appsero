@@ -10,7 +10,8 @@ import { LoginPage } from "../pages/login";
 import { DashboardPage } from "../pages/dashboard";
 import { PluginCreate } from "../pages/pluginCreate";
 import { ThemeCreate } from "../pages/themeCreate";
-import { BundlePage } from "../pages/bundle";
+import { BundleCreate } from "../pages/bundleCreate";
+import { BundleUpdate } from "../pages/bundleUpdate";
 import { ProductPage } from "../pages/products";
 import { PluginUpdate } from "../pages/pluginUpdate";
 import { ThemeUpdate } from "../pages/themeUpdate";
@@ -114,31 +115,33 @@ test("Theme Update", async ({ page }) => {
 })
 
 
-// /* ------------------------ Bundle ------------------------ */
-// test("Bundle Create & Update", async ({ page }) => {
+/* ------------------------ Bundle Create ------------------------ */
+test("Bundle Create", async ({ page }) => {
 
-//     const bundle = new BundlePage(page);
+    const bundle = new BundleCreate(page);
 
-//     //Could be any valid bundle name
-//     const bundle_name: string = faker.lorem.words(2); //Auto generated bundle name
-//     const website_url: string = ""; //Website URL through which this bundle will be sold
-//     const product_name: string = ""; //Product Name which will be connected with this bundle
-//     const bundle_products: string[] = ["", ""];
+    const bundle_name: string = faker.lorem.words(2); //Auto generated bundle name
+    const website_url: string = "https://unsolvable-dare-fancy.flywp.xyz"; //Website URL through which this bundle will be sold
+    const product_name: string = "WooCommerceBundleTest"; //Product Name which will be connected with this bundle
+    const bundle_products: string[] = [ plugins_name[1], themes_name[1]];
 
-//     await bundle.bundle_create(bundle_name, website_url, product_name, bundle_products);
+    await bundle.bundle_create(bundle_name, website_url, product_name, bundle_products);
 
-//     /* -------- Bundle Update -------- */
-//     /**
-//     * updateable_bundle_name = Any valid existing bundle name and this bundle will be updated
-//     * new_bundle_name = New Bundle Name
-//     */
+    bundles_name.push(bundle_name);
 
-//     let updateable_bundle_name: string = ""; //Any valid updateable bundle name
-//     let new_bundle_name: string = ""; //Any valid bundle name
+})
 
-//     await bundle.bundle_update(updateable_bundle_name, new_bundle_name);
+/* ------------------------ Bundle Update ------------------------ */
+test("Bundle Update", async ({ page }) => {
 
-// })
+    const bundle = new BundleUpdate(page);
+
+    let new_bundle_name: string = faker.lorem.words(2); //new bundle name
+    await bundle.bundle_update(bundles_name[0], new_bundle_name);
+
+    bundles_name[0] = new_bundle_name;
+
+})
 
 
 /* ------------------------ Release Create ------------------------ */
@@ -198,13 +201,35 @@ test("Release Delete", async ({ page }) => {
 // })
 
 
-/* ------------------------ Product Delete ------------------------ */
+/* ------------------------ Plugin Delete ------------------------ */
 test("Plugin Delete", async ({ page }) => {
 
     const product = new ProductPage(page);
 
     for (let i: number = 0; i < plugins_name.length; i++) {
         await product.product_delete(plugins_name[i]);
+    }
+
+})
+
+/* ------------------------ Theme Delete ------------------------ */
+test("Theme Delete", async ({ page }) => {
+
+    const product = new ProductPage(page);
+
+    for (let i: number = 0; i < themes_name.length; i++) {
+        await product.product_delete(themes_name[i]);
+    }
+
+})
+
+/* ------------------------ Bundle Delete ------------------------ */
+test("Bundle Delete", async ({ page }) => {
+
+    const product = new ProductPage(page);
+
+    for (let i: number = 0; i < bundles_name.length; i++) {
+        await product.product_delete(bundles_name[i]);
     }
 
 })
