@@ -21,7 +21,7 @@ jobs:
       - name: Install Playwright Browsers
         run: npx playwright install --with-deps
       - name: Run Playwright tests with verbose logging and retries
-        run: DEBUG=pw:api npx playwright test --retries=1 --headless --workers=1
+        run: DEBUG=pw:api npx playwright test --retries=1 --workers=1
         env:
           CI: true
           USER_NAME: ${{ secrets.USER_NAME }}
