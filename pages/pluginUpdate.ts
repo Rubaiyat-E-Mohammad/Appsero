@@ -1,7 +1,7 @@
 import { expect, Page } from '@playwright/test';
 import { plugin_locator, product_finding_locator } from '../utils/locators';
 import { HelperFunctions } from '../utils/helperFunctions.ts';
-
+import { URL } from '../utils/locators';
 class PluginUpdate{
   readonly page: Page;
 
@@ -13,7 +13,7 @@ class PluginUpdate{
 
   async plugin_update(plugin_name, new_plugin_name) {
 
-    await this.page.goto(process.env.BASE_URL as string);
+    await this.page.goto(URL as string);
     await this.page.waitForLoadState("networkidle");
 
     await this.page.locator(product_finding_locator.plugin_navigate).click();

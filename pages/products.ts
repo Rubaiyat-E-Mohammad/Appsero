@@ -5,6 +5,7 @@ import { generateVersionNumber } from '../utils/locators';
 import { plugin_locator } from '../utils/locators';
 import path from 'path';
 import { HelperFunctions } from '../utils/helperFunctions';
+import { URL } from '../utils/locators';
 
 export class ProductPage{
   readonly page: Page;
@@ -15,7 +16,7 @@ export class ProductPage{
 
   async release_create(product_name) {
 
-    await this.page.goto(process.env.BASE_URL as string);
+    await this.page.goto(URL as string);
     await this.page.waitForLoadState("networkidle");
 
     await this.page.locator(product_finding_locator.search).hover();
@@ -67,7 +68,7 @@ export class ProductPage{
 
   async release_update(product_name, version) {
 
-    await this.page.goto(process.env.BASE_URL as string);
+    await this.page.goto(URL as string);
     await this.page.waitForLoadState("networkidle");
 
     await this.page.locator(product_finding_locator.search).hover();
@@ -94,7 +95,7 @@ export class ProductPage{
     await this.page.locator(plugin_locator.wp_version_select).click();
     await this.page.locator(plugin_locator.wp_version).click();
     await this.page.locator(plugin_locator.tested_upto_version_select).click();
-    await this.page.getByText(plugin_locator.tested_upto_version).nth(1).click();
+    await this.page.getByText(plugin_locator.tested_upto_version_change).nth(1).click();
     await this.page.locator(product_finding_locator.change_log).fill("Updated Test Release");
     await this.page.locator(product_finding_locator.required_plugin).click();
     await (await this.page.waitForSelector(product_finding_locator.req_plugin_slug)).fill('woocommerce');
@@ -123,7 +124,7 @@ export class ProductPage{
 
   async release_delete(product_name, version) {
 
-    await this.page.goto(process.env.BASE_URL as string);
+    await this.page.goto(URL as string);
     await this.page.waitForLoadState("networkidle");
 
     await this.page.locator(product_finding_locator.search).hover();
@@ -148,7 +149,7 @@ export class ProductPage{
 
   async license_create(product_name) {
 
-    await this.page.goto(process.env.BASE_URL as string);
+    await this.page.goto(URL as string);
     await this.page.waitForLoadState("networkidle");
 
     await this.page.locator(product_finding_locator.search).hover();
@@ -179,7 +180,7 @@ export class ProductPage{
 
   async license_update(product_name) {
 
-    await this.page.goto(process.env.BASE_URL as string);
+    await this.page.goto(URL as string);
     await this.page.waitForLoadState("networkidle");
 
     await this.page.locator(product_finding_locator.search).hover();
@@ -210,7 +211,7 @@ export class ProductPage{
 
   async license_delete(product_name) {
 
-    await this.page.goto(process.env.BASE_URL as string);
+    await this.page.goto(URL as string);
     await this.page.waitForLoadState("networkidle");
 
     await this.page.locator(product_finding_locator.search).hover();
@@ -240,7 +241,7 @@ export class ProductPage{
 
   async product_delete(product_name) {
 
-    await this.page.goto(process.env.BASE_URL as string);
+    await this.page.goto(URL as string);
     await this.page.waitForLoadState("networkidle");
 
     await this.page.locator(product_finding_locator.search).hover();

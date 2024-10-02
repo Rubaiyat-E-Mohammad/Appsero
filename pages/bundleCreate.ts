@@ -1,6 +1,6 @@
 import { Page, expect } from '@playwright/test';
 import { bundle_locator, product_finding_locator } from '../utils/locators';
-
+import { URL } from '../utils/locators';
 
 export class BundleCreate {
   readonly page: Page;
@@ -11,7 +11,7 @@ export class BundleCreate {
 
   async bundle_create(bundle_name, website_url, product_name, bundle_products) {
 
-    await this.page.goto(process.env.BASE_URL as string);
+    await this.page.goto(URL as string);
     await this.page.locator(bundle_locator.navigate).click();
     await this.page.locator(bundle_locator.add_bundle).click();
     await this.page.locator(bundle_locator.name).fill(bundle_name);

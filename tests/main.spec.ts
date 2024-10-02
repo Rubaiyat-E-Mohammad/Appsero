@@ -2,6 +2,7 @@ import { test } from "@playwright/test";
 import * as faker from 'faker';
 import * as fs from "fs";
 import * as dotenv from 'dotenv';
+import { SITE } from '../utils/locators';
 
 // Load environment variables from .env file
 dotenv.config();
@@ -23,6 +24,8 @@ const bundles_name: string[] = [];
 const release_versions: string[] = [];
 const updated_release_versions: string[] = [];
 fs.writeFile('state.json', '{"cookies":[],"origins": []}', function () { });
+
+
 
 
 /* ------------------------ Login ------------------------ */
@@ -60,12 +63,10 @@ test("Pro Plugin Create", async ({ page }) => {
 
     const plugin = new PluginCreate(page);
     const pro_plugin_name: string = faker.lorem.words(2); //Auto generated plugin name
-    const website_url: string = "https://rubaiyatem.sytes.net"; //Website URL through which this plugin will be sold
     const product_name: string = "WooCommercePluginTest"; //Product Name which will be connected with this plugin
 
-    await plugin.pro_plugin_create(pro_plugin_name, website_url, product_name);
+    await plugin.pro_plugin_create(pro_plugin_name, SITE, product_name);
     plugins_name.push(pro_plugin_name);
-
 })
 
 /* ------------------------ Plugin Update------------------------ */
@@ -95,10 +96,9 @@ test("Pro Theme Create", async ({ page }) => {
 
     const theme = new ThemeCreate(page);
     const pro_theme_name: string = faker.lorem.words(2); //Auto generated theme name
-    const website_url: string = "https://rubaiyatem.sytes.net"; //Website URL through which this theme will be sold
     const theme_name: string = "WooCommerceThemeTest"; //Product Name which will be connected with this theme
 
-    await theme.pro_theme_create(pro_theme_name, website_url, theme_name);
+    await theme.pro_theme_create(pro_theme_name, SITE, theme_name);
     themes_name.push(pro_theme_name);
 
 })
@@ -121,13 +121,12 @@ test("Bundle Create", async ({ page }) => {
     const bundle = new BundleCreate(page);
 
     const bundle_name: string = faker.lorem.words(2); //Auto generated bundle name
-    const website_url: string = "https://rubaiyatem.sytes.net"; //Website URL through which this bundle will be sold
     const product_name: string = "WooCommerceBundleTest"; //Product Name which will be connected with this bundle
-    const bundle_products: string[] = [ plugins_name[1], themes_name[1]];
+    const bundle_products: string[] = ["WooCommercePluginTest", "WooCommerceThemeTest"];
 
-    await bundle.bundle_create(bundle_name, website_url, product_name, bundle_products);
-
+    await bundle.bundle_create(bundle_name, SITE, product_name, bundle_products);
     bundles_name.push(bundle_name);
+
 
 })
 

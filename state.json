@@ -2,30 +2,30 @@
   "cookies": [
     {
       "name": "m",
-      "value": "91a9acb5-ccbc-41bd-9f2c-f112270064c5909470",
+      "value": "9bf40f4d-c179-4904-9af9-1c8a309a6ec1266532",
       "domain": "m.stripe.com",
       "path": "/",
-      "expires": 1761800750.021731,
+      "expires": 1762418864.351993,
       "httpOnly": true,
       "secure": true,
       "sameSite": "None"
     },
     {
       "name": "__stripe_mid",
-      "value": "682e4ae7-5df6-466e-ad5e-cc78162c449f00f446",
-      "domain": ".staging.appsero.com",
+      "value": "50ec33d8-c00f-4a04-a647-b851052daec2ed5ac7",
+      "domain": ".dashboard.appsero.com",
       "path": "/",
-      "expires": 1758776750,
+      "expires": 1759394864,
       "httpOnly": false,
       "secure": true,
       "sameSite": "Strict"
     },
     {
       "name": "__stripe_sid",
-      "value": "cf2eba30-652d-47c2-8a86-c4015c76527e02265c",
-      "domain": ".staging.appsero.com",
+      "value": "11cbb6a2-2c69-46ef-9bcf-385207c4d0a858bdb5",
+      "domain": ".dashboard.appsero.com",
       "path": "/",
-      "expires": 1727242550,
+      "expires": 1727860664,
       "httpOnly": false,
       "secure": true,
       "sameSite": "Strict"
@@ -33,15 +33,15 @@
   ],
   "origins": [
     {
-      "origin": "https://staging.appsero.com",
+      "origin": "https://dashboard.appsero.com",
       "localStorage": [
         {
           "name": "token",
-          "value": "8QCMBv11IawhUuiZXg4oI27N32ZXIhMK"
+          "value": "pWK7TpcVI9RICTFQMdaZAfJeNRemHOgx"
         },
         {
           "name": "user",
-          "value": "{\"id\":57,\"first_name\":\"Rubaiyat E\",\"last_name\":\"Mohammad\",\"email\":\"rubaiyat.mohammad@wedevs.com\",\"timezone\":\"Asia/Dhaka\",\"uuid\":\"17b981fd-7337-4d19-8558-1422ad37eb15\",\"subscribed\":false,\"allow_premium\":true}"
+          "value": "{\"id\":2851,\"first_name\":\"Rubaiyat E\",\"last_name\":\"Mohammad\",\"email\":\"rubaiyat.mohammad@wedevs.com\",\"timezone\":null,\"uuid\":\"9fc362c5-fe3d-42ca-8707-4d8b21ce9dcf\",\"subscribed\":false,\"allow_premium\":true}"
         }
       ]
     }

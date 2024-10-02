@@ -1,6 +1,6 @@
 import { expect, Page } from '@playwright/test';
 import { plugin_locator } from '../utils/locators';
-
+import { URL } from '../utils/locators';
 class PluginCreate{
   readonly page: Page;
 
@@ -10,7 +10,7 @@ class PluginCreate{
 
   async free_plugin_create(plugin_name) {
 
-    await this.page.goto(process.env.BASE_URL as string);
+    await this.page.goto(URL as string);
     await this.page.waitForLoadState("networkidle");
 
     await this.page.locator(plugin_locator.navigate).click();
@@ -35,7 +35,7 @@ class PluginCreate{
 
   async pro_plugin_create(plugin_name, website_url, product_name) {
 
-    await this.page.goto(process.env.BASE_URL as string);
+    await this.page.goto(URL as string);
     await this.page.waitForLoadState("networkidle");
 
     await this.page.locator(plugin_locator.navigate).click();

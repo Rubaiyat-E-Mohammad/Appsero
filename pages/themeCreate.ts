@@ -1,5 +1,6 @@
 import { expect, Page } from '@playwright/test';
 import { theme_locator } from '../utils/locators';
+import { URL } from '../utils/locators';
 
 
 export class ThemeCreate {
@@ -11,7 +12,7 @@ export class ThemeCreate {
 
   async free_theme_create(theme_name) {
 
-    await this.page.goto(process.env.BASE_URL as string);
+    await this.page.goto(URL as string);
     await this.page.locator(theme_locator.navigate).click();
     await this.page.locator(theme_locator.add_theme).click();
     await this.page.locator(theme_locator.free_theme).click();
@@ -33,7 +34,7 @@ export class ThemeCreate {
 
   async pro_theme_create(theme_name, website_url, product_name) {
 
-    await this.page.goto(process.env.BASE_URL as string);
+    await this.page.goto(URL as string);
     await this.page.locator(theme_locator.navigate).click();
     await this.page.locator(theme_locator.add_theme).click();
     await this.page.locator(theme_locator.pro_theme).click();

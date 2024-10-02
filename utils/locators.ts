@@ -1,5 +1,13 @@
 import * as faker from 'faker';
 
+import * as dotenv from 'dotenv';
+
+// Load environment variables from .env file
+dotenv.config();
+
+let URL = process.env.STAGING === '0' ? process.env.PRODUCTION_URL : process.env.STAGING_URL;
+let SITE = process.env.STAGING === '0' ? process.env.PRODUCTION_SITE : process.env.STAGING_SITE;
+
 let login_locator: { email, pass, submit: string } = {
     email: '//input[@type="email"]',
     pass: '//input[@type="password"]',
@@ -8,7 +16,7 @@ let login_locator: { email, pass, submit: string } = {
 
 let plugin_locator: {
     navigate, add_plugin, free_plugin, pro_plugin, manual_entry, name, slug, plugin_version, php_version_select, php_version,
-    wp_version_select, wp_version, tested_upto_version_select, tested_upto_version, submit, yes, wcom_map, use_appsero, 
+    wp_version_select, wp_version, tested_upto_version_select, tested_upto_version, tested_upto_version_change, submit, yes, wcom_map, use_appsero, 
     select_website, website_click, select_product, product_click, skip, next, done, complete, check_product: string
 } = {
 
@@ -26,7 +34,8 @@ let plugin_locator: {
     wp_version_select: '(//div[@class="ant-select-selection__rendered"])[5]',
     wp_version: '//li[contains(text(), "4.9")]',
     tested_upto_version_select: '(//div[@class="ant-select-selection__rendered"])[6]',
-    tested_upto_version: '6.6',
+    tested_upto_version: '6.5',
+    tested_upto_version_change: '6.6',
     submit: '//span[text()="Next"]',
     yes: '//span[text()="Yes"]',
     wcom_map: '//p[text()="WooCommerce + WooCommerce API Manager"]',
@@ -184,4 +193,4 @@ let generateVersionNumber: { major, minor, patch: string } = {
     patch: faker.datatype.number({ min: 0, max: 9 })
 };
 
-export { login_locator, plugin_locator, theme_locator, bundle_locator, product_finding_locator, dashboard_locator, generateVersionNumber };
+export { URL, SITE, login_locator, plugin_locator, theme_locator, bundle_locator, product_finding_locator, dashboard_locator, generateVersionNumber };

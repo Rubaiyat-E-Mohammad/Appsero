@@ -26,7 +26,11 @@ jobs:
           CI: true
           USER_NAME: ${{ secrets.USER_NAME }}
           PASSWORD: ${{ secrets.PASSWORD }}
-          BASE_URL: ${{ secrets.BASE_URL }}
+          PRODUCTION_URL: ${{ secrets.PRODUCTION_URL }}
+          STAGING_URL: ${{ secrets.STAGING_URL }}
+          STAGING: ${{ secrets.STAGING }}
+          PRODUCTION_SITE: ${{ secrets.PRODUCTION_SITE }}
+          STAGING_SITE: ${{ secrets.STAGING_SITE }}
       - name: Save Screenshots
         uses: actions/upload-artifact@v3
         if: failure()
