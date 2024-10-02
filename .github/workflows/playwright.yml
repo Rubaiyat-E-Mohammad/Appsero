@@ -15,7 +15,7 @@ jobs:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
         with:
-          node-version: 16
+          node-version: 20
       - name: Install dependencies
         run: npm ci
       - name: Install Playwright Browsers
@@ -49,5 +49,5 @@ jobs:
           subject: ${{ github.job }} job of ${{ github.repository }} has ${{ job.status }}
           body: ${{ github.job }} job in workflow ${{ github.workflow }} of ${{ github.repository }} has ${{ job.status }}. This test is conducted on Appsero Staging site. The attached index.html file will give the details report.
           to: saif@wedevs.com,farazi@wedevs.com,tons2468@gmail.com
-          from: Appsero UI Automation Test
+          from: rubaiyat.mohammad@wedevs.com
           attachments: ./playwright-report/index.html
