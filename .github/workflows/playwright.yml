@@ -1,4 +1,4 @@
-name: Appsero Staging Site Tests
+name: Appsero E2E Tests
 on:
   workflow_dispatch:
   schedule:
