@@ -4,7 +4,6 @@ import * as fs from "fs";
 import * as dotenv from 'dotenv';
 import { SITE } from '../utils/locators';
 
-// Load environment variables from .env file
 dotenv.config();
 
 import { LoginPage } from "../pages/login";
@@ -13,9 +12,13 @@ import { PluginCreate } from "../pages/pluginCreate";
 import { ThemeCreate } from "../pages/themeCreate";
 import { BundleCreate } from "../pages/bundleCreate";
 import { BundleUpdate } from "../pages/bundleUpdate";
-import { ProductPage } from "../pages/products";
+import { ProductDelete } from "../pages/productDelete";
 import { PluginUpdate } from "../pages/pluginUpdate";
 import { ThemeUpdate } from "../pages/themeUpdate";
+import { OrderPage } from "../pages/orders";
+import { ReleaseCreate } from "../pages/releaseCreate";
+import { ReleaseUpdate } from "../pages/releaseUpdate";
+import { ReleaseDelete } from "../pages/releaseDelete";
 
 
 const plugins_name: string[] = [];
@@ -24,8 +27,6 @@ const bundles_name: string[] = [];
 const release_versions: string[] = [];
 const updated_release_versions: string[] = [];
 fs.writeFile('state.json', '{"cookies":[],"origins": []}', function () { });
-
-
 
 
 /* ------------------------ Login ------------------------ */
@@ -69,15 +70,23 @@ test("Pro Plugin Create", async ({ page }) => {
     plugins_name.push(pro_plugin_name);
 })
 
-/* ------------------------ Plugin Update------------------------ */
-test("Plugin Update", async ({ page }) => {
+/* ------------------------ Free Plugin Update------------------------ */
+test("Free Plugin Update", async ({ page }) => {
 
     const plugin = new PluginUpdate(page);
-    for (let i: number = 0; i < plugins_name.length; i++) {
-        const new_plugin_name: string = faker.lorem.words(2);
-        await plugin.plugin_update(plugins_name[i], new_plugin_name);
-        plugins_name[i] = new_plugin_name;
-    }
+
+    const new_plugin_name: string = faker.lorem.words(2);
+    await plugin.free_plugin_update(plugins_name[0], new_plugin_name);
+    plugins_name[0] = new_plugin_name;
+})
+
+/* ------------------------ Pro Plugin Update------------------------ */
+test("Pro Plugin Update", async ({ page }) => {
+
+    const plugin = new PluginUpdate(page);
+    const new_plugin_name: string = faker.lorem.words(2);
+    await plugin.pro_plugin_update(plugins_name[1], new_plugin_name);
+    plugins_name[1] = new_plugin_name;
 })
 
 
@@ -103,15 +112,22 @@ test("Pro Theme Create", async ({ page }) => {
 
 })
 
-/* ------------------------ Theme Update------------------------ */
-test("Theme Update", async ({ page }) => {
+/* ------------------------Free Theme Update------------------------ */
+test("Free Theme Update", async ({ page }) => {
 
     const theme = new ThemeUpdate(page);
-    for (let i: number = 0; i < themes_name.length; i++) {
-        const new_theme_name: string = faker.lorem.words(2);
-        await theme.theme_update(themes_name[i], new_theme_name);
-        themes_name[i] = new_theme_name;
-    }
+    const new_theme_name: string = faker.lorem.words(2);
+    await theme.free_theme_update(themes_name[0], new_theme_name);
+    themes_name[0] = new_theme_name;
+})
+
+/* ------------------------Pro Theme Update------------------------ */
+test("Pro Theme Update", async ({ page }) => {
+
+    const theme = new ThemeUpdate(page);
+    const new_theme_name: string = faker.lorem.words(2);
+    await theme.pro_theme_update(themes_name[1], new_theme_name);
+    themes_name[1] = new_theme_name;
 })
 
 
@@ -143,92 +159,117 @@ test("Bundle Update", async ({ page }) => {
 })
 
 
-/* ------------------------ Release Create ------------------------ */
-test("Release Create", async ({ page }) => {
+/* ------------------------Release Create of Free Plugin------------------------ */
+test("Release Create of free plugin", async ({ page }) => {
 
-    const product = new ProductPage(page);
+    const product = new ReleaseCreate(page);
 
-    for (let i: number = 0; i < plugins_name.length; i++) {
-        release_versions.push(await product.release_create(plugins_name[i]));
-    }
+    release_versions.push(await product.free_release_create(plugins_name[0]));
 
 })
 
-/* ------------------------ Release Update ------------------------ */
-test("Release Update", async ({ page }) => {
+/* ------------------------Release Create of Pro Plugin------------------------ */
+test("Release Create of pro plugin", async ({ page }) => {
 
-    const product = new ProductPage(page);
+    const product = new ReleaseCreate(page);
 
-    for (let i: number = 0; i < plugins_name.length; i++) {
-        updated_release_versions.push(await product.release_update(plugins_name[i], release_versions[i]));
-    }
+    release_versions.push(await product.pro_release_create(plugins_name[1]));
 
 })
 
-/* ------------------------ Release Delete ------------------------ */
-test("Release Delete", async ({ page }) => {
+/* ------------------------ Release Update of Free Plugin------------------------ */
+test("Release Update of free plugin", async ({ page }) => {
 
-    const product = new ProductPage(page);
+    const product = new ReleaseUpdate(page);
 
-    for (let i: number = 0; i < plugins_name.length; i++) {
-        await product.release_delete(plugins_name[i], updated_release_versions[i]);
-    }
+    updated_release_versions.push(await product.free_release_update(plugins_name[0], release_versions[0]));
 
 })
 
+/* ------------------------ Release Update of Pro Plugin------------------------ */
+test("Release Update of pro plugin", async ({ page }) => {
 
-/* ------------------------ License CRUD ------------------------ */
-// test("License CRUD", async ({ page }) => {
+    const product = new ReleaseUpdate(page);
 
-//     const product = new ProductPage(page);
-
-//     /* -------- License Create -------- */
-//     for (let i: number = 0; i < products_name.length; i++) {
-//         await product.license_create(products_name[i]);
-//     }
-
-//     /* -------- License Update -------- */
-//     for (let i: number = 0; i < products_name.length; i++) {
-//         await product.license_update(products_name[i]);
-//     }
-
-//     /* -------- License Delete -------- */
-//     for (let i: number = 0; i < products_name.length; i++) {
-//         await product.license_delete(products_name[i]);
-//     }
-
-// })
-
-
-/* ------------------------ Plugin Delete ------------------------ */
-test("Plugin Delete", async ({ page }) => {
-
-    const product = new ProductPage(page);
-
-    for (let i: number = 0; i < plugins_name.length; i++) {
-        await product.product_delete(plugins_name[i]);
-    }
+    updated_release_versions.push(await product.pro_release_update(plugins_name[1], release_versions[1]));
 
 })
 
-/* ------------------------ Theme Delete ------------------------ */
-test("Theme Delete", async ({ page }) => {
+/* ------------------------ Order Create ------------------------ */
+test("Order create", async ({ page }) => {
+    const order = new OrderPage(page);
+    await order.order_create(plugins_name[1]);
+});
 
-    const product = new ProductPage(page);
+/* ------------------------ Variation Upgrade ------------------------ */
+test("Variation Upgrade", async ({ page }) => {
+    const order = new OrderPage(page);
+    await order.variation_upgrade(plugins_name[1]);
+});
 
-    for (let i: number = 0; i < themes_name.length; i++) {
-        await product.product_delete(themes_name[i]);
-    }
+/* ------------------------ Release Delete of free plugin------------------------ */
+test("Release Delete of free plugin", async ({ page }) => {
+
+    const product = new ReleaseDelete(page);
+    await product.free_release_delete(plugins_name[0], updated_release_versions[0]);
+
+})
+
+/* ------------------------ Release Delete of pro plugin------------------------ */
+test("Release Delete of pro plugin", async ({ page }) => {
+
+    const product = new ReleaseDelete(page);
+    await product.pro_release_delete(plugins_name[1], updated_release_versions[1]);
+
+})
+
+/* ------------------------ Order Delete ------------------------ */
+test("Order delete", async ({ page }) => {
+    const order = new OrderPage(page);
+    await order.order_delete(plugins_name[1]);
+});
+
+
+/* ------------------------Free Plugin Delete ------------------------ */
+test("Free Plugin Delete", async ({ page }) => {
+
+    const product = new ProductDelete(page);
+
+    await product.free_product_delete(plugins_name[0]);
+
+})
+
+/* ------------------------Pro Plugin Delete ------------------------ */
+test("Pro Plugin Delete", async ({ page }) => {
+
+    const product = new ProductDelete(page);
+
+    await product.pro_product_delete(plugins_name[1]);
+
+})
+
+/* ------------------------Free Theme Delete ------------------------ */
+test("Free Theme Delete", async ({ page }) => {
+
+    const product = new ProductDelete(page);
+
+    await product.free_product_delete(themes_name[0]);
+
+})
+
+/* ------------------------Pro Theme Delete ------------------------ */
+test("Pro Theme Delete", async ({ page }) => {
+
+    const product = new ProductDelete(page);
+
+    await product.pro_product_delete(themes_name[1]);
 
 })
 
 /* ------------------------ Bundle Delete ------------------------ */
 test("Bundle Delete", async ({ page }) => {
 
-    const product = new ProductPage(page);
-
-    for (let i: number = 0; i < bundles_name.length; i++) {
-        await product.product_delete(bundles_name[i]);
-    }
+    const product = new ProductDelete(page);
+    await product.pro_product_delete(bundles_name[0]);
 
 })

@@ -1,6 +1,7 @@
 import { expect, Page } from '@playwright/test';
 import { plugin_locator } from '../utils/locators';
 import { URL } from '../utils/locators';
+import { HelperFunctions } from '../utils/helperFunctions';
 class PluginCreate{
   readonly page: Page;
 
@@ -10,23 +11,23 @@ class PluginCreate{
 
   async free_plugin_create(plugin_name) {
 
-    await this.page.goto(URL as string);
-    await this.page.waitForLoadState("networkidle");
+    const helper = new HelperFunctions(this.page);
+    await helper.safeGoto(URL as string);
 
-    await this.page.locator(plugin_locator.navigate).click();
-    await this.page.locator(plugin_locator.add_plugin).click();
-    await this.page.locator(plugin_locator.free_plugin).click();
-    await this.page.locator(plugin_locator.manual_entry).click();
+    await helper.safeClick(plugin_locator.navigate);
+    await helper.safeClick(plugin_locator.add_plugin);
+    await helper.safeClick(plugin_locator.free_plugin);
+    await helper.safeClick(plugin_locator.manual_entry);
 
-    await this.page.locator(plugin_locator.name).fill(plugin_name);
-    await this.page.locator(plugin_locator.slug).fill(((plugin_name.split(" ")).join("_")).toLowerCase());
+    await helper.safeFill(plugin_locator.name, plugin_name);
+    await helper.safeFill(plugin_locator.slug, (((plugin_name.split(" ")).join("_")).toLowerCase()));
 
-    await this.page.locator(plugin_locator.submit).click()
-    await this.page.locator(plugin_locator.skip).click();
-    await this.page.locator(plugin_locator.skip).click();
-    await this.page.locator(plugin_locator.next).click();
-    await this.page.locator(plugin_locator.done).click();
-    await this.page.locator(plugin_locator.complete).click();
+    await helper.safeClick(plugin_locator.submit);
+    await helper.safeClick(plugin_locator.skip);
+    //await helper.safeClick(plugin_locator.skip);
+    await helper.safeClick(plugin_locator.next);
+    await helper.safeClick(plugin_locator.done);
+    await helper.safeClick(plugin_locator.complete);
 
     await expect(await this.page.locator(plugin_locator.check_product)).toHaveText("Get Started");
 
@@ -35,33 +36,32 @@ class PluginCreate{
 
   async pro_plugin_create(plugin_name, website_url, product_name) {
 
-    await this.page.goto(URL as string);
-    await this.page.waitForLoadState("networkidle");
+    const helper = new HelperFunctions(this.page);
+    await helper.safeGoto(URL as string);
 
-    await this.page.locator(plugin_locator.navigate).click();
-    await this.page.locator(plugin_locator.add_plugin).click();
-    await this.page.locator(plugin_locator.pro_plugin).click();
+    await helper.safeClick(plugin_locator.navigate);
+    await helper.safeClick(plugin_locator.add_plugin);
+    await helper.safeClick(plugin_locator.pro_plugin);
 
-    await this.page.locator(plugin_locator.name).fill(plugin_name);
-    await this.page.locator(plugin_locator.slug).fill(((plugin_name.split(" ")).join("_")).toLowerCase());
+    await helper.safeFill(plugin_locator.name, plugin_name);
+    await helper.safeFill(plugin_locator.slug, (((plugin_name.split(" ")).join("_")).toLowerCase()));
 
-    await this.page.locator(plugin_locator.submit).click();
+    await helper.safeClick(plugin_locator.submit);
 
-    await this.page.locator(plugin_locator.yes).click();
-    await this.page.locator(plugin_locator.wcom_map).click();
-    await this.page.locator(plugin_locator.use_appsero).click();
-    await this.page.locator(plugin_locator.select_website).click();
-    await this.page.locator('//li[contains(text(),"' + website_url + '")]').click();
-    await this.page.waitForLoadState("networkidle");
-    await this.page.locator(plugin_locator.select_product).click();
-    await this.page.locator('//li[contains(text(),"' + product_name + '")]').click();
+    await helper.safeClick(plugin_locator.yes);
+    await helper.safeClick(plugin_locator.wcom_map);
+    await helper.safeClick(plugin_locator.use_appsero);
+    await helper.safeClick(plugin_locator.select_website);
+    await helper.safeClick('//li[contains(text(),"' + website_url + '")]');
+    await helper.safeClick(plugin_locator.select_product);
+    await helper.safeClick('//li[contains(text(),"' + product_name + '")]');
 
-    await this.page.locator(plugin_locator.next).click();
+    await helper.safeClick(plugin_locator.next);
     await expect(this.page.locator('//h2[text()="Installation Method"]')).toHaveText("Installation Method");
-    await this.page.locator(plugin_locator.next).click();
+    await helper.safeClick(plugin_locator.next);
 
-    await this.page.locator(plugin_locator.done).click();
-    await this.page.locator(plugin_locator.complete).click();
+    await helper.safeClick(plugin_locator.done);
+    await helper.safeClick(plugin_locator.complete);
 
     await expect(await this.page.locator(plugin_locator.check_product)).toHaveText("Get Started");
   };

@@ -1,6 +1,7 @@
 import { Page } from "@playwright/test";
 import { login_locator } from "../utils/locators";
 import { URL } from '../utils/locators';
+import { HelperFunctions } from '../utils/helperFunctions';
 
 export class LoginPage {
 
@@ -13,15 +14,15 @@ export class LoginPage {
 
   async login(user_name, password) {
 
-    await this.page.goto(URL as string);
+    const helper = new HelperFunctions(this.page);
+    await helper.safeGoto(URL as string);
 
-    await this.page.locator(login_locator.email).fill(user_name);
-    await this.page.locator(login_locator.pass).fill(password);
-    await this.page.locator(login_locator.submit).click();
-
-    await this.page.waitForLoadState("networkidle");
-
+    await helper.safeFill(login_locator.email, user_name);
+    await helper.safeFill(login_locator.pass, password);
+    await helper.safeClick(login_locator.submit);
+    await this.page.waitForTimeout(3000);
     await this.page.context().storageState({ path: 'state.json' });
+
 
   }
 }

@@ -1,1 +1,49 @@
-{"cookies":[],"origins": []}
+{
+  "cookies": [
+    {
+      "name": "m",
+      "value": "cf86896a-603e-4477-b28e-5607d9f1b15db0c78c",
+      "domain": "m.stripe.com",
+      "path": "/",
+      "expires": 1763201367.273061,
+      "httpOnly": true,
+      "secure": true,
+      "sameSite": "None"
+    },
+    {
+      "name": "__stripe_mid",
+      "value": "2eaef26f-bcf9-4a6d-870c-77503e5844a4b9ef19",
+      "domain": ".dashboard.appsero.com",
+      "path": "/",
+      "expires": 1760177367,
+      "httpOnly": false,
+      "secure": true,
+      "sameSite": "Strict"
+    },
+    {
+      "name": "__stripe_sid",
+      "value": "f038c70e-3492-4382-bfc2-b87b7e3e3cbb739b66",
+      "domain": ".dashboard.appsero.com",
+      "path": "/",
+      "expires": 1728643167,
+      "httpOnly": false,
+      "secure": true,
+      "sameSite": "Strict"
+    }
+  ],
+  "origins": [
+    {
+      "origin": "https://dashboard.appsero.com",
+      "localStorage": [
+        {
+          "name": "token",
+          "value": "pWK7TpcVI9RICTFQMdaZAfJeNRemHOgx"
+        },
+        {
+          "name": "user",
+          "value": "{\"id\":2851,\"first_name\":\"Rubaiyat E\",\"last_name\":\"Mohammad\",\"email\":\"rubaiyat.mohammad@wedevs.com\",\"timezone\":null,\"uuid\":\"9fc362c5-fe3d-42ca-8707-4d8b21ce9dcf\",\"subscribed\":false,\"allow_premium\":true}"
+        }
+      ]
+    }
+  ]
+}

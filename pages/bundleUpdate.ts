@@ -1,5 +1,5 @@
 import { Page, expect } from '@playwright/test';
-import { bundle_locator, product_finding_locator } from '../utils/locators';
+import { product_finding_locator } from '../utils/locators';
 import { HelperFunctions } from '../utils/helperFunctions.ts';
 import { URL } from '../utils/locators';
 
@@ -12,20 +12,18 @@ export class BundleUpdate {
 
   async bundle_update(updateable_bundle_name, new_bundle_name) {
 
-    await this.page.goto(URL as string);
-    await this.page.locator(product_finding_locator.bundle_navigate).click();
-    await this.page.locator(product_finding_locator.search).hover();
-    await this.page.locator(product_finding_locator.search_project).click();
-    await this.page.locator(product_finding_locator.search_project).fill(updateable_bundle_name);
-    await this.page.locator('(//h3[text()="' + updateable_bundle_name + '"])[1]').click();
-
     const helper = new HelperFunctions(this.page);
+    await helper.safeGoto(URL as string);
+    await helper.safeClick(product_finding_locator.bundle_navigate);
+    await helper.safeHover(product_finding_locator.search);
+    await helper.safeFill(product_finding_locator.search_project, updateable_bundle_name);
+    await helper.safeClick('(//h3[text()="' + updateable_bundle_name + '"])[1]');
+    await this.page.waitForLoadState("networkidle");
     await helper.skipBilling();
-    
-    await this.page.locator(product_finding_locator.settings).click();
-    await this.page.locator(product_finding_locator.edit).click();
-    await this.page.locator(product_finding_locator.name).fill(new_bundle_name);
-    await this.page.locator(product_finding_locator.update_bundle).click();
+    await helper.safeClick(product_finding_locator.settings);
+    await helper.safeClick(product_finding_locator.edit);
+    await helper.safeFill(product_finding_locator.name, new_bundle_name);
+    await helper.safeClick(product_finding_locator.update_bundle);
 
   }
 }

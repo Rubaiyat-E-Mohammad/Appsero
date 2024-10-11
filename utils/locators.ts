@@ -193,4 +193,26 @@ let generateVersionNumber: { major, minor, patch: string } = {
     patch: faker.datatype.number({ min: 0, max: 9 })
 };
 
-export { URL, SITE, login_locator, plugin_locator, theme_locator, bundle_locator, product_finding_locator, dashboard_locator, generateVersionNumber };
+let orders_locator: {sales, orders, create_order, select_variation, day, customer_name, email, customer_phone, price, submit, 
+    order_view, license_key, licenses, upgrade, week, delete, yes} = {
+    sales: '//span[text()="Sales"]',
+    orders: '//a[normalize-space()="Orders"]',
+    create_order: '//span[text()="Create Order"]',
+    select_variation: '//div[@id="variation"]',
+    day: '//li[normalize-space()="day"]',
+    customer_name: '//input[@id="name"]',
+    email: '//input[@id="email"]',
+    customer_phone: '//input[@id="phone"]',
+    price: '//input[@id="price"]',
+    submit: 'submit',
+    order_view: '//button[@class="mr-8 ant-btn"][1]',
+    license_key: '//td[@class="tcol-license-key col-primary"][1]',
+    licenses: '//span[normalize-space(text())="Licenses"]',
+    upgrade: '//span[text()="Upgrade Variation"]',
+    week: '//li[normalize-space()="week"]',
+    delete: '//span[text()="Delete"]',
+    yes: '//span[text()="Yes"]'
+
+}
+
+export { URL, SITE, login_locator, plugin_locator, theme_locator, bundle_locator, product_finding_locator, dashboard_locator, generateVersionNumber, orders_locator };

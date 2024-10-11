@@ -1,5 +1,5 @@
 import { Page, expect } from '@playwright/test';
-import { theme_locator, product_finding_locator } from '../utils/locators';
+import { product_finding_locator } from '../utils/locators';
 import { HelperFunctions } from '../utils/helperFunctions.ts';
 import { URL } from '../utils/locators';
 
@@ -11,21 +11,40 @@ export class ThemeUpdate {
     this.page = page;
   }
 
-  async theme_update(updateable_theme_name, new_theme_name) {
+  async free_theme_update(updateable_theme_name, new_theme_name) {
 
-    await this.page.goto(URL as string);
-    await this.page.locator(product_finding_locator.theme_navigate).click();
-    await this.page.locator(product_finding_locator.search).hover();
-    await this.page.locator(product_finding_locator.search_project).click();
-    await this.page.locator(product_finding_locator.search_project).fill(updateable_theme_name);
-    await this.page.locator('(//h3[text()="' + updateable_theme_name + '"])[1]').click();
     const helper = new HelperFunctions(this.page);
+    await helper.safeGoto(URL as string);
+    await helper.safeClick(product_finding_locator.theme_navigate);
+    await helper.safeHover(product_finding_locator.search);
+    await helper.safeFill(product_finding_locator.search_project, updateable_theme_name);
+    await helper.safeClick('(//h3[text()="' + updateable_theme_name + '"])[1]');
+    await this.page.waitForLoadState("networkidle");
     await helper.skipBilling();
-    await this.page.locator(product_finding_locator.settings).click();
-    await this.page.locator(product_finding_locator.edit).click();
+    await helper.safeClick(product_finding_locator.settings);
+    await helper.safeClick(product_finding_locator.edit);
 
-    await this.page.locator(product_finding_locator.name).fill(new_theme_name);
-    await this.page.locator(product_finding_locator.update_theme).click();
+    await helper.safeFill(product_finding_locator.name, new_theme_name);
+    await helper.safeClick(product_finding_locator.update_theme);
 
   };
+
+  async pro_theme_update(updateable_theme_name, new_theme_name) {
+
+    const helper = new HelperFunctions(this.page);
+    await helper.safeGoto(URL as string);
+    await helper.safeClick(product_finding_locator.theme_navigate);
+    await helper.safeHover(product_finding_locator.search);
+    await helper.safeFill(product_finding_locator.search_project, updateable_theme_name);
+    await helper.safeClick('(//h3[text()="' + updateable_theme_name + '"])[1]');
+    await this.page.waitForLoadState("networkidle");
+    await helper.skipBilling();
+    await helper.safeClick(product_finding_locator.settings);
+    await helper.safeClick(product_finding_locator.edit);
+
+    await helper.safeFill(product_finding_locator.name, new_theme_name);
+    await helper.safeClick(product_finding_locator.update_theme);
+
+  };
+
 }

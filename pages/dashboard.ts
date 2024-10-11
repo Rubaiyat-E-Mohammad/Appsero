@@ -2,6 +2,7 @@ import { Page } from '@playwright/test';
 import { dashboard_locator } from '../utils/locators';
 import * as fs from 'fs';
 import { URL } from '../utils/locators';
+import { HelperFunctions } from '../utils/helperFunctions';
 
 class DashboardPage {
     readonly page: Page;
@@ -18,8 +19,8 @@ class DashboardPage {
             todays_revenue, todays_new_subscriptions, todays_new_orders, todays_refunds: string
         }[] = [];
 
-        await this.page.goto(URL as string);
-        await this.page.waitForLoadState("networkidle");
+        const helper = new HelperFunctions(this.page);
+        await helper.safeGoto(URL as string);
 
         /* ---- Data Scrapping ---- */
         // let x: string = await this.page.locator('').innerText();
