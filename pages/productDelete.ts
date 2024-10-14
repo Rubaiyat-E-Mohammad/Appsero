@@ -22,7 +22,6 @@ export class ProductDelete{
     await helper.safeHover(product_finding_locator.search);
     await helper.safeFill(product_finding_locator.search_project, product_name);
     await helper.safeClick('//h3[text()="' + product_name + '"]');
-    await this.page.waitForLoadState("networkidle");
     await helper.skipBilling();
     await helper.safeClick(product_finding_locator.settings);
     await helper.safeClick(product_finding_locator.edit);
@@ -39,7 +38,6 @@ export class ProductDelete{
     await helper.safeHover(product_finding_locator.search);
     await helper.safeFill(product_finding_locator.search_project, product_name);
     await helper.safeClick('//h3[text()="' + product_name + '"]');
-    await this.page.waitForLoadState("networkidle");
     await helper.skipBilling();
     await helper.safeClick(product_finding_locator.settings);
     await helper.safeClick(product_finding_locator.edit);

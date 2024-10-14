@@ -19,16 +19,10 @@ export class OrderPage{
     //await helper.safeClick(product_finding_locator.search_project);
     await helper.safeFill(product_finding_locator.search_project, product_name);
     await helper.safeClick('//h3[text()="' + product_name + '"]');
-
-    await this.page.waitForLoadState("networkidle");
     await helper.skipBilling();
-
     await helper.safeClick(orders_locator.sales);
     await helper.safeClick(orders_locator.orders);
-
-    await this.page.waitForLoadState("networkidle");
     await helper.safeClick(orders_locator.create_order);
-
     await helper.safeClick(orders_locator.select_variation);
     await helper.safeClick(orders_locator.day);
     await helper.safeFill(orders_locator.customer_name, "John Doe");
@@ -54,12 +48,9 @@ export class OrderPage{
     //await helper.safeClick(product_finding_locator.search_project);
     await helper.safeFill(product_finding_locator.search_project, product_name);
     await helper.safeClick('//h3[text()="' + product_name + '"]');
-    await this.page.waitForLoadState("networkidle");
     await helper.skipBilling();
-
     await helper.safeClick(orders_locator.sales);
     await helper.safeClick(orders_locator.orders);
-
     await helper.safeClick(orders_locator.order_view);
     await helper.safeClick(orders_locator.license_key);
     await helper.safeClick(orders_locator.upgrade);
@@ -76,7 +67,6 @@ export class OrderPage{
     await helper.safeHover(product_finding_locator.search);
     await helper.safeFill(product_finding_locator.search_project, product_name);
     await helper.safeClick('//h3[text()="' + product_name + '"]');
-    await this.page.waitForLoadState("networkidle");
     await helper.skipBilling();
     await helper.safeClick(orders_locator.sales);
     await helper.safeClick(orders_locator.orders);

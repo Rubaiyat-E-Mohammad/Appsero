@@ -18,7 +18,6 @@ export class BundleUpdate {
     await helper.safeHover(product_finding_locator.search);
     await helper.safeFill(product_finding_locator.search_project, updateable_bundle_name);
     await helper.safeClick('(//h3[text()="' + updateable_bundle_name + '"])[1]');
-    await this.page.waitForLoadState("networkidle");
     await helper.skipBilling();
     await helper.safeClick(product_finding_locator.settings);
     await helper.safeClick(product_finding_locator.edit);
