@@ -76,7 +76,7 @@ test("Free Plugin Update", async ({ page }) => {
     const plugin = new PluginUpdate(page);
 
     const new_plugin_name: string = faker.lorem.words(2);
-    await plugin.free_plugin_update(plugins_name[0], new_plugin_name);
+    await plugin.plugin_update(plugins_name[0], new_plugin_name);
     plugins_name[0] = new_plugin_name;
 })
 
@@ -85,7 +85,7 @@ test("Pro Plugin Update", async ({ page }) => {
 
     const plugin = new PluginUpdate(page);
     const new_plugin_name: string = faker.lorem.words(2);
-    await plugin.pro_plugin_update(plugins_name[1], new_plugin_name);
+    await plugin.plugin_update(plugins_name[1], new_plugin_name);
     plugins_name[1] = new_plugin_name;
 })
 
@@ -117,7 +117,7 @@ test("Free Theme Update", async ({ page }) => {
 
     const theme = new ThemeUpdate(page);
     const new_theme_name: string = faker.lorem.words(2);
-    await theme.free_theme_update(themes_name[0], new_theme_name);
+    await theme.theme_update(themes_name[0], new_theme_name);
     themes_name[0] = new_theme_name;
 })
 
@@ -126,7 +126,7 @@ test("Pro Theme Update", async ({ page }) => {
 
     const theme = new ThemeUpdate(page);
     const new_theme_name: string = faker.lorem.words(2);
-    await theme.pro_theme_update(themes_name[1], new_theme_name);
+    await theme.theme_update(themes_name[1], new_theme_name);
     themes_name[1] = new_theme_name;
 })
 
@@ -164,7 +164,7 @@ test("Release Create of free plugin", async ({ page }) => {
 
     const product = new ReleaseCreate(page);
 
-    release_versions.push(await product.free_release_create(plugins_name[0]));
+    release_versions.push(await product.release_create(plugins_name[0]));
 
 })
 
@@ -173,7 +173,7 @@ test("Release Create of pro plugin", async ({ page }) => {
 
     const product = new ReleaseCreate(page);
 
-    release_versions.push(await product.pro_release_create(plugins_name[1]));
+    release_versions.push(await product.release_create(plugins_name[1]));
 
 })
 
@@ -182,7 +182,7 @@ test("Release Update of free plugin", async ({ page }) => {
 
     const product = new ReleaseUpdate(page);
 
-    updated_release_versions.push(await product.free_release_update(plugins_name[0], release_versions[0]));
+    updated_release_versions.push(await product.release_update(plugins_name[0], release_versions[0]));
 
 })
 
@@ -191,7 +191,7 @@ test("Release Update of pro plugin", async ({ page }) => {
 
     const product = new ReleaseUpdate(page);
 
-    updated_release_versions.push(await product.pro_release_update(plugins_name[1], release_versions[1]));
+    updated_release_versions.push(await product.release_update(plugins_name[1], release_versions[1]));
 
 })
 
@@ -211,7 +211,7 @@ test("Variation Upgrade", async ({ page }) => {
 test("Release Delete of free plugin", async ({ page }) => {
 
     const product = new ReleaseDelete(page);
-    await product.free_release_delete(plugins_name[0], updated_release_versions[0]);
+    await product.release_delete(plugins_name[0], updated_release_versions[0]);
 
 })
 
@@ -219,7 +219,7 @@ test("Release Delete of free plugin", async ({ page }) => {
 test("Release Delete of pro plugin", async ({ page }) => {
 
     const product = new ReleaseDelete(page);
-    await product.pro_release_delete(plugins_name[1], updated_release_versions[1]);
+    await product.release_delete(plugins_name[1], updated_release_versions[1]);
 
 })
 
@@ -235,7 +235,7 @@ test("Free Plugin Delete", async ({ page }) => {
 
     const product = new ProductDelete(page);
 
-    await product.free_product_delete(plugins_name[0]);
+    await product.product_delete(plugins_name[0]);
 
 })
 
@@ -244,7 +244,7 @@ test("Pro Plugin Delete", async ({ page }) => {
 
     const product = new ProductDelete(page);
 
-    await product.pro_product_delete(plugins_name[1]);
+    await product.product_delete(plugins_name[1]);
 
 })
 
@@ -253,7 +253,7 @@ test("Free Theme Delete", async ({ page }) => {
 
     const product = new ProductDelete(page);
 
-    await product.free_product_delete(themes_name[0]);
+    await product.product_delete(themes_name[0]);
 
 })
 
@@ -262,7 +262,7 @@ test("Pro Theme Delete", async ({ page }) => {
 
     const product = new ProductDelete(page);
 
-    await product.pro_product_delete(themes_name[1]);
+    await product.product_delete(themes_name[1]);
 
 })
 
@@ -270,6 +270,6 @@ test("Pro Theme Delete", async ({ page }) => {
 test("Bundle Delete", async ({ page }) => {
 
     const product = new ProductDelete(page);
-    await product.pro_product_delete(bundles_name[0]);
+    await product.product_delete(bundles_name[0]);
 
 })

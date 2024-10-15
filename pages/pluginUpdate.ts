@@ -11,7 +11,7 @@ class PluginUpdate{
   
   
 
-  async free_plugin_update(plugin_name, new_plugin_name) {
+  async plugin_update(plugin_name, new_plugin_name) {
 
     const helper = new HelperFunctions(this.page);
     await helper.safeGoto(URL as string);
@@ -21,26 +21,7 @@ class PluginUpdate{
     await helper.safeFill(product_finding_locator.search_project, plugin_name);
     await helper.safeClick('(//h3[text()="' + plugin_name + '"])[1]');
     await helper.skipBilling();
-    await helper.safeClick(product_finding_locator.settings);
-    await helper.safeClick(product_finding_locator.edit);
-
-    await helper.safeFill(plugin_locator.name, new_plugin_name);
-    await helper.safeClick(product_finding_locator.update_plugin);
-    
-
-  };
-
-  async pro_plugin_update(plugin_name, new_plugin_name) {
-
-    const helper = new HelperFunctions(this.page);
-    await helper.safeGoto(URL as string);
-
-    await helper.safeClick(product_finding_locator.plugin_navigate);
-    await helper.safeHover(product_finding_locator.search);
-    await helper.safeFill(product_finding_locator.search_project, plugin_name);
-    await helper.safeClick('(//h3[text()="' + plugin_name + '"])[1]');
-    await helper.skipBilling();
-    await helper.safeClick(product_finding_locator.settings);
+    await this.page.locator(product_finding_locator.settings).click();
     await helper.safeClick(product_finding_locator.edit);
 
     await helper.safeFill(plugin_locator.name, new_plugin_name);

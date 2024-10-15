@@ -19,7 +19,7 @@ export class BundleUpdate {
     await helper.safeFill(product_finding_locator.search_project, updateable_bundle_name);
     await helper.safeClick('(//h3[text()="' + updateable_bundle_name + '"])[1]');
     await helper.skipBilling();
-    await helper.safeClick(product_finding_locator.settings);
+    await this.page.locator(product_finding_locator.settings).click();
     await helper.safeClick(product_finding_locator.edit);
     await helper.safeFill(product_finding_locator.name, new_bundle_name);
     await helper.safeClick(product_finding_locator.update_bundle);

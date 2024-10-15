@@ -13,28 +13,8 @@ export class ReleaseDelete{
   constructor(page: Page) {
     this.page = page;
   }
-
-
-  async free_release_delete(product_name, version) {
-
-    const helper = new HelperFunctions(this.page);
-    await this.page.goto(URL as string);
-
-    await helper.safeHover(product_finding_locator.search);
-    await helper.safeFill(product_finding_locator.search_project, product_name);
-    await helper.safeClick('//h3[text()="' + product_name + '"]');
-
-    await helper.safeClick(product_finding_locator.releases);
-
-    const find_release: string = product_finding_locator.find_release_pre + version + product_finding_locator.find_release_post;
-    await helper.safeClick(find_release);
-    await helper.safeClick(product_finding_locator.yes);
-
-    await expect(this.page.locator(find_release)).toBeHidden();
-
-  };
   
-  async pro_release_delete(product_name, version) {
+  async release_delete(product_name, version) {
 
     const helper = new HelperFunctions(this.page);
     await this.page.goto(URL as string);
