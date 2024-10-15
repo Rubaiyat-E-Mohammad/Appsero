@@ -22,7 +22,7 @@ export class BundleCreate {
     for (let i: number = 0; i < bundle_products.length; i++) {
       await helper.safeClick(bundle_locator.select_products);
       await this.page.locator('//div[text()=" ' + bundle_products[i] + ' "]').click();
-      await this.page.waitForLoadState('networkidle');
+      await this.page.waitForTimeout(2000);
       (await this.page.waitForSelector(bundle_locator.select_variation)).click();
       await helper.clickByText('month');
     }
