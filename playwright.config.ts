@@ -28,7 +28,7 @@ export default defineConfig({
   use: {
     // Maximum time each action such as `click()` can take. Defaults to 0 (no limit). 
     actionTimeout: 0,
-    headless: false,
+    headless: true,
     viewport: { width: 1280, height: 720 },
     // Base URL to use in actions like `await page.goto('/')`. 
     // baseURL: 'http://localhost:3000',

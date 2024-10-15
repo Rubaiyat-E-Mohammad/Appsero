@@ -19,7 +19,7 @@ jobs:
       - name: Install dependencies
         run: npm ci
       - name: Install Playwright Browsers
-        run: npx playwright install --with-deps
+        run: npx playwright install chromium --with-deps
       - name: Run Playwright tests with verbose logging and retries
         run: DEBUG=pw:api npx playwright test --retries=1 --workers=1
         env:
