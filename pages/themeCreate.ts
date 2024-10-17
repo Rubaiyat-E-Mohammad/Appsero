@@ -61,7 +61,8 @@ export class ThemeCreate {
     await helper.safeClick(theme_locator.complete);
 
     await expect(await this.page.locator(theme_locator.check_product)).toHaveText("Get Started");
-
+    
+    await helper.skipBilling();
   };
 
 }

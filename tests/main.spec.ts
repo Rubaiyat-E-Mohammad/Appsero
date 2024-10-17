@@ -1,4 +1,4 @@
-import { test } from "@playwright/test";
+import { test, chromium, Browser, BrowserContext, Page } from "@playwright/test";
 import * as faker from 'faker';
 import * as fs from "fs";
 import * as dotenv from 'dotenv';
@@ -7,6 +7,7 @@ import { SITE } from '../utils/locators';
 dotenv.config();
 
 import { LoginPage } from "../pages/login";
+import { LogoutPage } from "../pages/logout";
 import { DashboardPage } from "../pages/dashboard";
 import { PluginCreate } from "../pages/pluginCreate";
 import { ThemeCreate } from "../pages/themeCreate";
@@ -19,18 +20,26 @@ import { OrderPage } from "../pages/orders";
 import { ReleaseCreate } from "../pages/releaseCreate";
 import { ReleaseUpdate } from "../pages/releaseUpdate";
 import { ReleaseDelete } from "../pages/releaseDelete";
+import { EmailsPage } from "../pages/emails";
 
+let browser: Browser;
+let context: BrowserContext;
+let page: Page;
 
-const plugins_name: string[] = [];
-const themes_name: string[] = [];
-const bundles_name: string[] = [];
+const plugins_name: string[] = ['free_plugin', 'WooCommercePluginTest'];
+const themes_name: string[] = ['free_theme', 'WooCommerceThemeTest'];
+const bundles_name: string[] = ['WooCommerceBundleTest'];
 const release_versions: string[] = [];
 const updated_release_versions: string[] = [];
 fs.writeFile('state.json', '{"cookies":[],"origins": []}', function () { });
 
 
 /* ------------------------ Login ------------------------ */
-test("Login", async ({ page }) => {
+test.beforeAll("Login", async () => {
+
+    browser = await chromium.launch();
+    context = await browser.newContext();
+    page = await context.newPage();
 
     const login = new LoginPage(page);
     await login.login(process.env.USER_NAME, process.env.PASSWORD);
@@ -40,7 +49,7 @@ test("Login", async ({ page }) => {
 
 
 /* ------------------------ Getting Dashboard Details ------------------------ */
-test("Getting Dashboard Overview Details", async ({ page }) => {
+test("Getting Dashboard Overview Details", async () => {
 
     const dashboard = new DashboardPage(page);
     await dashboard.overview_details();
@@ -49,7 +58,7 @@ test("Getting Dashboard Overview Details", async ({ page }) => {
 
 
 /* ------------------------ Free Plugin Create------------------------ */
-test("Free Plugin Create", async ({ page }) => {
+test("Free Plugin Create", async () => {
 
     const plugin = new PluginCreate(page);
     const free_plugin_name: string = faker.lorem.words(2); //Auto generated plugin name
@@ -60,7 +69,7 @@ test("Free Plugin Create", async ({ page }) => {
 })
 
 /* ------------------------ Pro Plugin Create------------------------ */
-test("Pro Plugin Create", async ({ page }) => {
+test("Pro Plugin Create", async () => {
 
     const plugin = new PluginCreate(page);
     const pro_plugin_name: string = faker.lorem.words(2); //Auto generated plugin name
@@ -71,7 +80,7 @@ test("Pro Plugin Create", async ({ page }) => {
 })
 
 /* ------------------------ Free Plugin Update------------------------ */
-test("Free Plugin Update", async ({ page }) => {
+test("Free Plugin Update", async () => {
 
     const plugin = new PluginUpdate(page);
 
@@ -81,7 +90,7 @@ test("Free Plugin Update", async ({ page }) => {
 })
 
 /* ------------------------ Pro Plugin Update------------------------ */
-test("Pro Plugin Update", async ({ page }) => {
+test("Pro Plugin Update", async () => {
 
     const plugin = new PluginUpdate(page);
     const new_plugin_name: string = faker.lorem.words(2);
@@ -91,7 +100,7 @@ test("Pro Plugin Update", async ({ page }) => {
 
 
 /* ------------------------ Free Theme Create ------------------------ */
-test("Free Theme Create", async ({ page }) => {
+test("Free Theme Create", async () => {
 
     const theme = new ThemeCreate(page);
     const free_theme_name: string = faker.lorem.words(2); //Auto generated theme name
@@ -101,7 +110,7 @@ test("Free Theme Create", async ({ page }) => {
 })
 
 /* ------------------------ Pro Theme Create ------------------------ */
-test("Pro Theme Create", async ({ page }) => {
+test("Pro Theme Create", async () => {
 
     const theme = new ThemeCreate(page);
     const pro_theme_name: string = faker.lorem.words(2); //Auto generated theme name
@@ -113,7 +122,7 @@ test("Pro Theme Create", async ({ page }) => {
 })
 
 /* ------------------------Free Theme Update------------------------ */
-test("Free Theme Update", async ({ page }) => {
+test("Free Theme Update", async () => {
 
     const theme = new ThemeUpdate(page);
     const new_theme_name: string = faker.lorem.words(2);
@@ -122,7 +131,7 @@ test("Free Theme Update", async ({ page }) => {
 })
 
 /* ------------------------Pro Theme Update------------------------ */
-test("Pro Theme Update", async ({ page }) => {
+test("Pro Theme Update", async () => {
 
     const theme = new ThemeUpdate(page);
     const new_theme_name: string = faker.lorem.words(2);
@@ -132,7 +141,7 @@ test("Pro Theme Update", async ({ page }) => {
 
 
 /* ------------------------ Bundle Create ------------------------ */
-test("Bundle Create", async ({ page }) => {
+test("Bundle Create", async () => {
 
     const bundle = new BundleCreate(page);
 
@@ -147,7 +156,7 @@ test("Bundle Create", async ({ page }) => {
 })
 
 /* ------------------------ Bundle Update ------------------------ */
-test("Bundle Update", async ({ page }) => {
+test("Bundle Update", async () => {
 
     const bundle = new BundleUpdate(page);
 
@@ -160,7 +169,7 @@ test("Bundle Update", async ({ page }) => {
 
 
 /* ------------------------Release Create of Free Plugin------------------------ */
-test("Release Create of free plugin", async ({ page }) => {
+test("Release Create of free plugin", async () => {
 
     const product = new ReleaseCreate(page);
 
@@ -169,7 +178,7 @@ test("Release Create of free plugin", async ({ page }) => {
 })
 
 /* ------------------------Release Create of Pro Plugin------------------------ */
-test("Release Create of pro plugin", async ({ page }) => {
+test("Release Create of pro plugin", async () => {
 
     const product = new ReleaseCreate(page);
 
@@ -178,7 +187,7 @@ test("Release Create of pro plugin", async ({ page }) => {
 })
 
 /* ------------------------ Release Update of Free Plugin------------------------ */
-test("Release Update of free plugin", async ({ page }) => {
+test("Release Update of free plugin", async () => {
 
     const product = new ReleaseUpdate(page);
 
@@ -187,7 +196,7 @@ test("Release Update of free plugin", async ({ page }) => {
 })
 
 /* ------------------------ Release Update of Pro Plugin------------------------ */
-test("Release Update of pro plugin", async ({ page }) => {
+test("Release Update of pro plugin", async () => {
 
     const product = new ReleaseUpdate(page);
 
@@ -196,19 +205,19 @@ test("Release Update of pro plugin", async ({ page }) => {
 })
 
 /* ------------------------ Order Create ------------------------ */
-test("Order create", async ({ page }) => {
+test("Order create", async () => {
     const order = new OrderPage(page);
     await order.order_create(plugins_name[1]);
 });
 
 /* ------------------------ Variation Upgrade ------------------------ */
-test("Variation Upgrade", async ({ page }) => {
+test("Variation Upgrade", async () => {
     const order = new OrderPage(page);
     await order.variation_upgrade(plugins_name[1]);
 });
 
 /* ------------------------ Release Delete of free plugin------------------------ */
-test("Release Delete of free plugin", async ({ page }) => {
+test("Release Delete of free plugin", async () => {
 
     const product = new ReleaseDelete(page);
     await product.release_delete(plugins_name[0], updated_release_versions[0]);
@@ -216,7 +225,7 @@ test("Release Delete of free plugin", async ({ page }) => {
 })
 
 /* ------------------------ Release Delete of pro plugin------------------------ */
-test("Release Delete of pro plugin", async ({ page }) => {
+test("Release Delete of pro plugin", async () => {
 
     const product = new ReleaseDelete(page);
     await product.release_delete(plugins_name[1], updated_release_versions[1]);
@@ -224,14 +233,20 @@ test("Release Delete of pro plugin", async ({ page }) => {
 })
 
 /* ------------------------ Order Delete ------------------------ */
-test("Order delete", async ({ page }) => {
+test("Order delete", async () => {
     const order = new OrderPage(page);
     await order.order_delete(plugins_name[1]);
 });
 
+/* ------------------------Adding Email Digests ------------------------ */
+test("Email Digest", async () => {
+    const email = new EmailsPage(page);
+    await email.email_digest(plugins_name[1]);
+});
+
 
 /* ------------------------Free Plugin Delete ------------------------ */
-test("Free Plugin Delete", async ({ page }) => {
+test("Free Plugin Delete", async () => {
 
     const product = new ProductDelete(page);
 
@@ -240,7 +255,7 @@ test("Free Plugin Delete", async ({ page }) => {
 })
 
 /* ------------------------Pro Plugin Delete ------------------------ */
-test("Pro Plugin Delete", async ({ page }) => {
+test("Pro Plugin Delete", async () => {
 
     const product = new ProductDelete(page);
 
@@ -249,7 +264,7 @@ test("Pro Plugin Delete", async ({ page }) => {
 })
 
 /* ------------------------Free Theme Delete ------------------------ */
-test("Free Theme Delete", async ({ page }) => {
+test("Free Theme Delete", async () => {
 
     const product = new ProductDelete(page);
 
@@ -258,7 +273,7 @@ test("Free Theme Delete", async ({ page }) => {
 })
 
 /* ------------------------Pro Theme Delete ------------------------ */
-test("Pro Theme Delete", async ({ page }) => {
+test("Pro Theme Delete", async () => {
 
     const product = new ProductDelete(page);
 
@@ -267,9 +282,22 @@ test("Pro Theme Delete", async ({ page }) => {
 })
 
 /* ------------------------ Bundle Delete ------------------------ */
-test("Bundle Delete", async ({ page }) => {
+test("Bundle Delete", async () => {
 
     const product = new ProductDelete(page);
     await product.product_delete(bundles_name[0]);
 
 })
+
+/* ------------------------ Logout ------------------------ */
+test.afterAll("Logout", async () => {
+
+    const logout = new LogoutPage(page);
+    await logout.logout();
+
+    await page.close();
+    await context.close();
+    await browser.close();
+
+
+});

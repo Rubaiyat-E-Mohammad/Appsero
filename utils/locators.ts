@@ -215,4 +215,26 @@ let orders_locator: {sales, orders, create_order, select_variation, day, custome
 
 }
 
-export { URL, SITE, login_locator, plugin_locator, theme_locator, bundle_locator, product_finding_locator, dashboard_locator, generateVersionNumber, orders_locator };
+let email_locator: { email_navigate, email_digest, add_email_digest, send_to, frequency, weekly, send_on, send_on_day, send_at, send_at_time, 
+    digest_name, submit, success_message } = {
+    email_navigate: '//span[text()="Email"]',
+    email_digest: '(//span[text()="Email Digest"])[1]',
+    add_email_digest: '//span[text()="Add Email Digest"]',
+    send_to: '//input[@id="send_to"]',
+    frequency: '//div[@id="frequency"]',
+    weekly: '//li[normalize-space()="Weekly"]',
+    send_on: '//div[@id="send_on"]',
+    send_on_day: '//li[normalize-space()="Wednesday"]',
+    send_at: '//div[@id="send_at"]',
+    send_at_time: '//li[normalize-space()="07:00 am"]',
+    digest_name: '//input[@id="name"]',
+    submit: '//span[text()="Submit"]',
+    success_message: '//div[@class="ant-notification-notice-message"]'
+}
+
+let logout_locator: { avater_button, logout_button } = {
+    avater_button: '//a[contains(@class,"ant-dropdown-link profile-menu")]',
+    logout_button: '//a[normalize-space(text())="Logout"]',
+};
+
+export { URL, SITE, login_locator, plugin_locator, theme_locator, bundle_locator, product_finding_locator, dashboard_locator, generateVersionNumber, orders_locator, email_locator, logout_locator };

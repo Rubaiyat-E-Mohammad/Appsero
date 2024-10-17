@@ -64,6 +64,8 @@ class PluginCreate{
     await helper.safeClick(plugin_locator.complete);
 
     await expect(await this.page.locator(plugin_locator.check_product)).toHaveText("Get Started");
+
+    await helper.skipBilling();
   };
 
 }

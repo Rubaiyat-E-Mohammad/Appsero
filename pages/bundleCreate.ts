@@ -38,6 +38,8 @@ export class BundleCreate {
 
     await helper.safeClick(bundle_locator.next);
 
+    await helper.skipBilling();
+
   };
 
 }
