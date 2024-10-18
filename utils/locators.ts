@@ -16,7 +16,7 @@ let login_locator: { email, pass, submit: string } = {
 
 let plugin_locator: {
     navigate, add_plugin, free_plugin, pro_plugin, manual_entry, name, slug, plugin_version, php_version_select, php_version,
-    wp_version_select, wp_version, tested_upto_version_select, tested_upto_version, tested_upto_version_change, submit, yes, wcom_map, use_appsero, 
+    wp_version_select, wp_version, tested_upto_version_select, tested_upto_version, tested_upto_version_change, submit, yes, wcom_map, use_appsero,
     select_website, website_click, select_product, product_click, skip, next, done, complete, check_product: string
 } = {
 
@@ -102,9 +102,9 @@ let bundle_locator: {
 };
 
 let product_finding_locator: {
-    search, search_project, settings, edit, update_plugin, plugin_navigate, update_theme, theme_navigate, update_bundle, 
-    bundle_navigate,name, version, php_version_select, php_version, wp_version_select, wp_version, tested_upto_version_select, 
-    tested_upto_version, delete,yes, releases, new_release, release_version, release_date, date, change_log, required_plugin, 
+    search, search_project, settings, edit, update_plugin, plugin_navigate, update_theme, theme_navigate, update_bundle,
+    bundle_navigate, name, version, php_version_select, php_version, wp_version_select, wp_version, tested_upto_version_select,
+    tested_upto_version, delete, yes, releases, new_release, release_version, release_date, date, change_log, required_plugin,
     req_plugin_slug, req_plugin_version, filepath, choosefile, termscheckbox, publish_release, update_release, check_release,
     update_release_pre, update_release_post, find_release_pre, find_release_post: string
 } = {
@@ -193,8 +193,10 @@ let generateVersionNumber: { major, minor, patch: string } = {
     patch: faker.datatype.number({ min: 0, max: 9 })
 };
 
-let orders_locator: {sales, orders, create_order, select_variation, day, customer_name, email, customer_phone, price, submit, 
-    order_view, license_key, licenses, upgrade, week, delete, yes} = {
+let orders_locator: {
+    sales, orders, create_order, select_variation, day, customer_name, email, customer_phone, price, submit,
+    order_view, license_key, licenses, upgrade, week, delete, yes
+} = {
     sales: '//span[text()="Sales"]',
     orders: '//a[normalize-space()="Orders"]',
     create_order: '//span[text()="Create Order"]',
@@ -213,10 +215,12 @@ let orders_locator: {sales, orders, create_order, select_variation, day, custome
     delete: '//span[text()="Delete"]',
     yes: '//span[text()="Yes"]'
 
-}
+};
 
-let email_locator: { email_navigate, email_digest, add_email_digest, send_to, frequency, weekly, send_on, send_on_day, send_at, send_at_time, 
-    digest_name, submit, success_message } = {
+let email_locator: {
+    email_navigate, email_digest, add_email_digest, send_to, frequency, weekly, send_on, send_on_day, send_at, send_at_time,
+    digest_name, submit, success_message
+} = {
     email_navigate: '//span[text()="Email"]',
     email_digest: '(//span[text()="Email Digest"])[1]',
     add_email_digest: '//span[text()="Add Email Digest"]',
@@ -230,11 +234,25 @@ let email_locator: { email_navigate, email_digest, add_email_digest, send_to, fr
     digest_name: '//input[@id="name"]',
     submit: '//span[text()="Submit"]',
     success_message: '//div[@class="ant-notification-notice-message"]'
-}
+};
+
+let variation_locator: {
+    pricing, add_new, variation_name, site_limit, variation_price, recurring_times, submit,
+    success_message
+} = {
+    pricing: '//a[contains(text(),"Pricing")]',
+    add_new: 'Add New',
+    variation_name: '(//input[@placeholder="Enter variation name"])[5]',
+    site_limit: '(//input[@placeholder="How many sites can be active"])[5]',
+    variation_price: '(//input[@placeholder="Enter variation price"])[5]',
+    recurring_times: '(//input[@placeholder="Recurring Times"])[5]',
+    submit: '//span[contains(text(),"Submit")]',
+    success_message: '//div[@class="ant-notification-notice-message"]',
+};
 
 let logout_locator: { avater_button, logout_button } = {
     avater_button: '//a[contains(@class,"ant-dropdown-link profile-menu")]',
     logout_button: '//a[normalize-space(text())="Logout"]',
 };
 
-export { URL, SITE, login_locator, plugin_locator, theme_locator, bundle_locator, product_finding_locator, dashboard_locator, generateVersionNumber, orders_locator, email_locator, logout_locator };
+export { URL, SITE, login_locator, plugin_locator, theme_locator, bundle_locator, product_finding_locator, dashboard_locator, generateVersionNumber, orders_locator, email_locator, logout_locator, variation_locator };

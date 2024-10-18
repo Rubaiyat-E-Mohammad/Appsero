@@ -2,30 +2,30 @@
   "cookies": [
     {
       "name": "m",
-      "value": "b665c001-7f7f-40dc-ba4a-0426f2bc4b1684963b",
+      "value": "b265f37d-4d7b-433e-938b-82c65308038d7c4353",
       "domain": "m.stripe.com",
       "path": "/",
-      "expires": 1763791173.607188,
+      "expires": 1763807225.891357,
       "httpOnly": true,
       "secure": true,
       "sameSite": "None"
     },
     {
       "name": "__stripe_mid",
-      "value": "d508038e-e9c3-435c-809e-821ea758413f199dae",
+      "value": "b9a3623c-4a87-4a18-9451-696cfaabbcb647c358",
       "domain": ".dashboard.appsero.com",
       "path": "/",
-      "expires": 1760767175,
+      "expires": 1760783225,
       "httpOnly": false,
       "secure": true,
       "sameSite": "Strict"
     },
     {
       "name": "__stripe_sid",
-      "value": "7c6c1f5f-c1ed-4abf-a650-3732d0823dc939f230",
+      "value": "99a5b291-af51-452e-a2c9-58588f51da193ac1cc",
       "domain": ".dashboard.appsero.com",
       "path": "/",
-      "expires": 1729232975,
+      "expires": 1729249025,
       "httpOnly": false,
       "secure": true,
       "sameSite": "Strict"

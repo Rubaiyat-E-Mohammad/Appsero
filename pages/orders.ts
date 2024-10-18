@@ -1,6 +1,6 @@
 import { expect, Page } from '@playwright/test';
 import * as faker from 'faker';
-import { product_finding_locator, orders_locator } from '../utils/locators';
+import { product_finding_locator, orders_locator, variation_locator } from '../utils/locators';
 import { HelperFunctions } from '../utils/helperFunctions';
 import { URL } from '../utils/locators';
 
@@ -76,6 +76,5 @@ export class OrderPage{
     await helper.safeClick(orders_locator.yes);
 
   };
-  
 
 }

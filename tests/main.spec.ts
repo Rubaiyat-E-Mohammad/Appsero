@@ -21,6 +21,7 @@ import { ReleaseCreate } from "../pages/releaseCreate";
 import { ReleaseUpdate } from "../pages/releaseUpdate";
 import { ReleaseDelete } from "../pages/releaseDelete";
 import { EmailsPage } from "../pages/emails";
+import { CreateVariationPage } from "../pages/createVariation";
 
 let browser: Browser;
 let context: BrowserContext;
@@ -209,10 +210,22 @@ test("Order create", async () => {
     await order.order_create(plugins_name[1]);
 });
 
-/* ------------------------ Variation Upgrade ------------------------ */
+/* ------------------------ Variation Upgrade of the order ------------------------ */
 test("Variation Upgrade", async () => {
     const order = new OrderPage(page);
     await order.variation_upgrade(plugins_name[1]);
+});
+
+/* ------------------------ Order Delete ------------------------ */
+test("Order delete", async () => {
+    const order = new OrderPage(page);
+    await order.order_delete(plugins_name[1]);
+});
+
+/* ------------------------ Creating New Variation ------------------------ */
+test.only("Creating Variation", async () => {
+    const variation = new CreateVariationPage(page);
+    await variation.create_variation(plugins_name[1]);
 });
 
 /* ------------------------ Release Delete of free plugin------------------------ */
@@ -230,12 +243,6 @@ test("Release Delete of pro plugin", async () => {
     await product.release_delete(plugins_name[1], updated_release_versions[1]);
 
 })
-
-/* ------------------------ Order Delete ------------------------ */
-test("Order delete", async () => {
-    const order = new OrderPage(page);
-    await order.order_delete(plugins_name[1]);
-});
 
 /* ------------------------Adding Email Digests ------------------------ */
 test("Email Digest", async () => {

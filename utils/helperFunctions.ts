@@ -44,7 +44,7 @@ export class HelperFunctions {
       await element.waitFor({ state: 'visible', timeout: 15000 });
       await element.click();
     } catch (err) {
-      console.error(`Failed to hover on ${selector}:`);
+      console.error(`Failed to click on ${selector}:`);
     }
   }
 
@@ -68,7 +68,7 @@ export class HelperFunctions {
         await skipBillingLocator.click();
       }
     } catch (error) {
-      console.log('Free Product');
+      console.log('Billing Skipped');
     }
   }
 
