@@ -61,10 +61,10 @@ test("Getting Dashboard Overview Details", async () => {
 test("Free Plugin Create", async () => {
 
     const plugin = new PluginCreate(page);
-    const free_plugin_name: string = faker.lorem.words(2); //Auto generated plugin name
+    const free_plugin_name: string = faker.lorem.words(2) + Math.floor(Math.random() * 1000).toString(); //Auto generated plugin name
 
     await plugin.free_plugin_create(free_plugin_name);
-    plugins_name.push(free_plugin_name);
+    plugins_name[0] = free_plugin_name;
 
 })
 
@@ -72,11 +72,11 @@ test("Free Plugin Create", async () => {
 test("Pro Plugin Create", async () => {
 
     const plugin = new PluginCreate(page);
-    const pro_plugin_name: string = faker.lorem.words(2); //Auto generated plugin name
+    const pro_plugin_name: string = faker.lorem.words(2) + Math.floor(Math.random() * 1000).toString(); //Auto generated plugin name
     const product_name: string = "WooCommercePluginTest"; //Product Name which will be connected with this plugin
 
     await plugin.pro_plugin_create(pro_plugin_name, SITE, product_name);
-    plugins_name.push(pro_plugin_name);
+    plugins_name[1] = pro_plugin_name;
 })
 
 /* ------------------------ Free Plugin Update------------------------ */
@@ -84,7 +84,7 @@ test("Free Plugin Update", async () => {
 
     const plugin = new PluginUpdate(page);
 
-    const new_plugin_name: string = faker.lorem.words(2);
+    const new_plugin_name: string = faker.lorem.words(2) + Math.floor(Math.random() * 1000).toString();
     await plugin.plugin_update(plugins_name[0], new_plugin_name);
     plugins_name[0] = new_plugin_name;
 })
@@ -93,7 +93,7 @@ test("Free Plugin Update", async () => {
 test("Pro Plugin Update", async () => {
 
     const plugin = new PluginUpdate(page);
-    const new_plugin_name: string = faker.lorem.words(2);
+    const new_plugin_name: string = faker.lorem.words(2) + Math.floor(Math.random() * 1000).toString();
     await plugin.plugin_update(plugins_name[1], new_plugin_name);
     plugins_name[1] = new_plugin_name;
 })
@@ -103,9 +103,9 @@ test("Pro Plugin Update", async () => {
 test("Free Theme Create", async () => {
 
     const theme = new ThemeCreate(page);
-    const free_theme_name: string = faker.lorem.words(2); //Auto generated theme name
+    const free_theme_name: string = faker.lorem.words(2) + Math.floor(Math.random() * 1000).toString(); //Auto generated theme name
     await theme.free_theme_create(free_theme_name);
-    themes_name.push(free_theme_name);
+    themes_name[0] = free_theme_name;
 
 })
 
@@ -113,11 +113,11 @@ test("Free Theme Create", async () => {
 test("Pro Theme Create", async () => {
 
     const theme = new ThemeCreate(page);
-    const pro_theme_name: string = faker.lorem.words(2); //Auto generated theme name
+    const pro_theme_name: string = faker.lorem.words(2) + Math.floor(Math.random() * 1000).toString(); //Auto generated theme name
     const theme_name: string = "WooCommerceThemeTest"; //Product Name which will be connected with this theme
 
     await theme.pro_theme_create(pro_theme_name, SITE, theme_name);
-    themes_name.push(pro_theme_name);
+    themes_name[1] = pro_theme_name;
 
 })
 
@@ -125,7 +125,7 @@ test("Pro Theme Create", async () => {
 test("Free Theme Update", async () => {
 
     const theme = new ThemeUpdate(page);
-    const new_theme_name: string = faker.lorem.words(2);
+    const new_theme_name: string = faker.lorem.words(2) + Math.floor(Math.random() * 1000).toString();
     await theme.theme_update(themes_name[0], new_theme_name);
     themes_name[0] = new_theme_name;
 })
@@ -134,7 +134,7 @@ test("Free Theme Update", async () => {
 test("Pro Theme Update", async () => {
 
     const theme = new ThemeUpdate(page);
-    const new_theme_name: string = faker.lorem.words(2);
+    const new_theme_name: string = faker.lorem.words(2) + Math.floor(Math.random() * 1000).toString();
     await theme.theme_update(themes_name[1], new_theme_name);
     themes_name[1] = new_theme_name;
 })
@@ -145,13 +145,12 @@ test("Bundle Create", async () => {
 
     const bundle = new BundleCreate(page);
 
-    const bundle_name: string = faker.lorem.words(2); //Auto generated bundle name
+    const bundle_name: string = faker.lorem.words(2) + Math.floor(Math.random() * 1000).toString(); //Auto generated bundle name
     const product_name: string = "WooCommerceBundleTest"; //Product Name which will be connected with this bundle
-    const bundle_products: string[] = ["WooCommercePluginTest", "WooCommerceThemeTest"];
+    const bundle_products: string[] = [plugins_name[1], themes_name[1]];
 
     await bundle.bundle_create(bundle_name, SITE, product_name, bundle_products);
-    bundles_name.push(bundle_name);
-
+    bundles_name[0] = bundle_name;
 
 })
 
@@ -160,7 +159,7 @@ test("Bundle Update", async () => {
 
     const bundle = new BundleUpdate(page);
 
-    let new_bundle_name: string = faker.lorem.words(2); //new bundle name
+    let new_bundle_name: string = faker.lorem.words(2) + Math.floor(Math.random() * 1000).toString(); //new bundle name
     await bundle.bundle_update(bundles_name[0], new_bundle_name);
 
     bundles_name[0] = new_bundle_name;
