@@ -223,7 +223,7 @@ test("Order delete", async () => {
 });
 
 /* ------------------------ Creating New Variation ------------------------ */
-test.only("Creating Variation", async () => {
+test("Creating Variation", async () => {
     const variation = new CreateVariationPage(page);
     await variation.create_variation(plugins_name[1]);
 });
