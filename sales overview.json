@@ -1,0 +1,14 @@
+[
+	{
+		"net_revenue": "$100.00",
+		"completed_orders": "1",
+		"refunds": "0",
+		"average_order_value": "$100.00",
+		"new_customer": "1",
+		"refunded": "$0.00",
+		"new_subscriptions": "1",
+		"renewal_orders": "0",
+		"active_subscriptions": "1",
+		"not_renewed": "0"
+	}
+]

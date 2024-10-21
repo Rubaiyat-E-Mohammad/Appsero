@@ -22,6 +22,7 @@ import { ReleaseUpdate } from "../pages/releaseUpdate";
 import { ReleaseDelete } from "../pages/releaseDelete";
 import { EmailsPage } from "../pages/emails";
 import { CreateVariationPage } from "../pages/createVariation";
+import { SalesPage } from "../pages/salesOverView";
 
 let browser: Browser;
 let context: BrowserContext;
@@ -214,6 +215,12 @@ test("Order create", async () => {
 test("Variation Upgrade", async () => {
     const order = new OrderPage(page);
     await order.variation_upgrade(plugins_name[1]);
+});
+
+/* ------------------------ Getting Sales Overview ------------------------ */
+test("Getting Sales Overview", async () => {
+    const sales = new SalesPage(page);
+    await sales.overview_details(plugins_name[1]);
 });
 
 /* ------------------------ Order Delete ------------------------ */

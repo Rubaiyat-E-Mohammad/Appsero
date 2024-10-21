@@ -194,11 +194,12 @@ let generateVersionNumber: { major, minor, patch: string } = {
 };
 
 let orders_locator: {
-    sales, orders, create_order, select_variation, day, customer_name, email, customer_phone, price, submit,
+    sales, orders, overview, create_order, select_variation, day, customer_name, email, customer_phone, price, submit,
     order_view, license_key, licenses, upgrade, week, delete, yes
 } = {
     sales: '//span[text()="Sales"]',
     orders: '//a[normalize-space()="Orders"]',
+    overview: '//a[normalize-space()="Overview"]',
     create_order: '//span[text()="Create Order"]',
     select_variation: '//div[@id="variation"]',
     day: '//li[normalize-space()="day"]',
@@ -255,4 +256,22 @@ let logout_locator: { avater_button, logout_button } = {
     logout_button: '//a[normalize-space(text())="Logout"]',
 };
 
-export { URL, SITE, login_locator, plugin_locator, theme_locator, bundle_locator, product_finding_locator, dashboard_locator, generateVersionNumber, orders_locator, email_locator, logout_locator, variation_locator };
+let sales_overview_locator: {
+    net_revenue, completed_orders, refunds, average_order_value, new_customer, refunded, new_subscriptions,
+    renewal_orders, active_subscriptions, not_renewed: string
+} = {
+    net_revenue: '(//h3[@class="project-number"]//span)[1]',
+    completed_orders: '(//h3[@class="project-number"]//span)[2]',
+    refunds: '(//h3[@class="project-number"]//span)[3]',
+    average_order_value: '(//h3[@class="project-number"]//span)[4]',
+    new_customer: '(//h3[@class="project-number"]//span)[5]',
+    refunded: '(//h3[@class="project-number"]//span)[6]',
+    new_subscriptions: '(//h3[@class="project-number"]//span)[7]',
+    renewal_orders: '(//h3[@class="project-number"]//span)[8]',
+    active_subscriptions: '(//h3[@class="project-number"]//span)[9]',
+    not_renewed: '(//h3[@class="project-number"]//span)[10]'
+}
+
+export { URL, SITE, login_locator, plugin_locator, theme_locator, bundle_locator, product_finding_locator, 
+    dashboard_locator, generateVersionNumber, orders_locator, email_locator, logout_locator, variation_locator,  
+    sales_overview_locator };

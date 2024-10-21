@@ -16,7 +16,6 @@ export class OrderPage{
     await helper.safeGoto(URL as string);
 
     await helper.safeHover(product_finding_locator.search);
-    //await helper.safeClick(product_finding_locator.search_project);
     await helper.safeFill(product_finding_locator.search_project, product_name);
     await helper.safeClick('//h3[text()="' + product_name + '"]');
     await helper.skipBilling();
