@@ -242,7 +242,7 @@ test("Adding Deactivation Reasons", async () => {
 });
 
 /* ------------------------ Auto responder Settings ------------------------ */
-test.only("Auto Responder Settings", async () => {
+test("Auto Responder Settings", async () => {
     const email = new EmailsPage(page);
     await email.auto_responder_settings(plugins_name[1]);
 });
