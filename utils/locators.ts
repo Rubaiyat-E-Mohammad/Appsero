@@ -220,7 +220,8 @@ let orders_locator: {
 
 let email_locator: {
     email_navigate, email_digest, add_email_digest, send_to, frequency, weekly, send_on, send_on_day, send_at, send_at_time,
-    digest_name, submit, success_message
+    digest_name, submit, success_message, deactivation_reasons, add_new_reason, deactivation_title, update_reasons, 
+    auto_responder, turn_on_responder, reply_to, update_mail, reason_on: string
 } = {
     email_navigate: '//span[text()="Email"]',
     email_digest: '(//span[text()="Email Digest"])[1]',
@@ -234,7 +235,17 @@ let email_locator: {
     send_at_time: '//li[normalize-space()="07:00 am"]',
     digest_name: '//input[@id="name"]',
     submit: '//span[text()="Submit"]',
-    success_message: '//div[@class="ant-notification-notice-message"]'
+    success_message: '//div[@class="ant-notification-notice-message"]',
+    deactivation_reasons: '(//a[normalize-space()="Deactivation Reasons"])[1]',
+    add_new_reason: '//span[text()="Add New Reason"]',
+    deactivation_title: '(//input[@type="text"])[1]',
+    update_reasons: '//span[text()="Update Reasons"]',
+    auto_responder: '(//a[normalize-space()="Auto Responder"])[1]',
+    turn_on_responder: '//span[text()="Deactivation Auto Responder"]/following-sibling::button',
+    reply_to: '(//input[@id="reply_to"])[1]',
+    update_mail: '(//button[@type="submit"])[1]',
+    reason_on: '(//button[@role="switch"])'
+
 };
 
 let variation_locator: {

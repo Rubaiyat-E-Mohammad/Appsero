@@ -235,6 +235,18 @@ test("Creating Variation", async () => {
     await variation.create_variation(plugins_name[1]);
 });
 
+/* ------------------------ Adding deactivation reasons ------------------------ */
+test("Adding Deactivation Reasons", async () => {
+    const email = new EmailsPage(page);
+    await email.deactivation_reason(plugins_name[1]);
+});
+
+/* ------------------------ Auto responder Settings ------------------------ */
+test.only("Auto Responder Settings", async () => {
+    const email = new EmailsPage(page);
+    await email.auto_responder_settings(plugins_name[1]);
+});
+
 /* ------------------------ Release Delete of free plugin------------------------ */
 test("Release Delete of free plugin", async () => {
 
