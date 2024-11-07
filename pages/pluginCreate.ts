@@ -24,7 +24,7 @@ class PluginCreate{
 
     await helper.safeClick(plugin_locator.submit);
     await helper.safeClick(plugin_locator.skip);
-    //await helper.safeClick(plugin_locator.skip);
+    await helper.safeClick(plugin_locator.skip);
     await helper.safeClick(plugin_locator.next);
     await helper.safeClick(plugin_locator.done);
     await helper.safeClick(plugin_locator.complete);
