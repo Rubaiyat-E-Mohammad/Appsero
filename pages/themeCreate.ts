@@ -25,7 +25,7 @@ export class ThemeCreate {
 
     await helper.safeClick(theme_locator.submit);
     await helper.safeClick(theme_locator.skip);
-    //await helper.safeClick(theme_locator.skip);
+    await helper.safeClick(theme_locator.skip);
     await helper.safeClick(theme_locator.next);
     await helper.safeClick(theme_locator.done);
     await helper.safeClick(theme_locator.complete);
