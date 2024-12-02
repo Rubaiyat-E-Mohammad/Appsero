@@ -39,7 +39,7 @@ jobs:
           path: test-results/
           retention-days: 30
       - name: Send Test Report on email
-        if: success()
+        if: failure()
         uses: dawidd6/action-send-mail@v3
         with:
           server_address: smtp.gmail.com
@@ -48,6 +48,6 @@ jobs:
           password: ${{ secrets.EMAIL_PASSWORD }}
           subject: ${{ github.job }} job of ${{ github.repository }} has ${{ job.status }}
           body: ${{ github.job }} job in workflow ${{ github.workflow }} of ${{ github.repository }} has ${{ job.status }}. This test is conducted on Appsero Staging site. The attached index.html file will give the details report.
-          to: saif@wedevs.com,farazi@wedevs.com,tons2468@gmail.com, nurul@wedevs.com
+          to: saif@wedevs.com,tons2468@gmail.com
           from: rubaiyat.mohammad@wedevs.com
           attachments: ./playwright-report/index.html
